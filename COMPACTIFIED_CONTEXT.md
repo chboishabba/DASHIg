@@ -9,6 +9,7 @@
 - Scope additions (not yet cloned): exo, petals, and Bittensor.
 - Grokking tests present at repo root: `26_grok_critical_scan.py`, `26_grok_sweep_adaptive.py`, `26_grok_sweep_adaptive_spv2.py` (time-to-grok benchmarking scripts).
 - Thesis: DASHI aims to show compression-driven dynamics discover optimal representations/symmetries without hard-coded lattices; evaluate via time-to-grok across paradigms.
-- Priority order: V5 operator prototype → visualization pipeline → formalism write-up.
+- Priority order: formalism write-up → V5 operator prototype → visualization pipeline.
+- Parallel goals: prime-based learner with DASHI, prime learner on same grokking task, one goal pending clarification.
 - Geometry-after-grok experiment: extract embeddings/hidden activations; analyze distance spectrum, PCA structure, neighbor regularity across pre/post-grok.
 - `temp_dashiQ/` contains new DASHI experiment scripts (closure/signature tests, cone diagnostics, ultrametric checks, HEPData contraction pipeline, orbit utilities).

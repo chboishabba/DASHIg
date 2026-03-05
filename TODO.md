@@ -3,18 +3,23 @@
 ## Context Sync
 
 - [ ] Decide whether to store the fetched conversation in the local archive (rerun resolver without --nostore or run chat-context-sync).
-- [ ] Confirm which follow-up deliverable to implement next: formalism, visualization pipeline, or v5 operator prototype.
+- [ ] Confirm the missing third parallel goal.
 
 ## Follow-up Deliverables
 
 - [ ] Formalism write-up (state space, update, decode) based on Agda modules.
-- [ ] 3D visualization pipeline A/B/C/D (continuous field, discrete kernel, contraction flow, orbit animation).
 - [ ] V5 operator definition or minimal Python filament-atom prototype.
+- [ ] 3D visualization pipeline A/B/C/D (continuous field, discrete kernel, contraction flow, orbit animation).
 
 ## Research Experiments
 
 - [ ] Geometry-after-grok analysis: extract embeddings/hidden activations, analyze distance spectrum, PCA projections, and neighbor counts across pre/post-grok.
 - [ ] Triage `temp_dashiQ/` scripts: categorize by experiment type, identify priority runs, and decide which should graduate into a structured pipeline.
+
+## Parallel Goals
+
+- [ ] Implement the prime-based learner with DASHI.
+- [ ] Implement the prime learner on the same grokking task for direct comparison.
 
 ## Scope References (Not Yet Cloned)
 

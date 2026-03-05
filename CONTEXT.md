@@ -30,9 +30,15 @@ DASHI investigates whether efficient learning systems can discover optimal repre
 
 ## Recommended Next Steps (Order)
 
-1. V5 operator prototype (establish dynamics first).
-2. Visualization pipeline (surface emergent geometry).
-3. Formalism write-up (document after behavior is concrete).
+1. Formalism write-up (state space, update, decode).
+2. V5 operator prototype (use formalism as the concrete spec).
+3. Visualization pipeline (surface emergent geometry).
+
+## Parallel Goals (Active)
+
+1. Implement the prime-based learner with DASHI.
+2. Implement the prime learner on the same grokking problem for direct performance comparison.
+3. (Pending: clarify the missing third goal.)
 
 ## Geometry-After-Grok Experiment (High Signal / Low Overhead)
 

@@ -39,7 +39,7 @@ The latest thread compares `sovereign-lila-e8` to DASHI, requests a formalism wr
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
 | Use `CONTEXT.md` + `COMPACTIFIED_CONTEXT.md` as canonical thread summary | Keeps full and compressed views aligned | — Pending |
-| Prioritize V5 operator prototype before visualization and formalism | Dynamics-first focus supports thesis validation | — Pending |
+| Prioritize formalism write-up before V5 operator and visualization | Use formalism as the spec for implementation order | — Pending |
 
 ---
 *Last updated: 2026-03-05 after context sync* 
