@@ -1,0 +1,6 @@
+[submodule "cognitive-observer-simulation"]
+	path = cognitive-observer-simulation
+	url = https://github.com/Khomyakov-Vladimir/cognitive-observer-simulation.git
+[submodule "LeechTransformer"]
+	path = LeechTransformer
+	url = https://github.com/SPUTNIKAI/LeechTransformer.git
