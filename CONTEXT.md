@@ -4,9 +4,10 @@ This file captures the canonical context for the ChatGPT thread:
 
 - Title: Repo Comparison: Sovereign-Lila-E8 vs Dashi
 - Conversation ID: 69a8d3f9-1320-839c-bce8-b355a1f72f3f
-- Fetched via: live fallback (re-gpt --view)
+- Canonical thread ID: f41b37a699acaa8615626ef0f4ae2cf23e4c5116
+- Fetched via: live fallback (re-gpt --view) + persisted to local structurer DB
 - Date captured: 2026-03-05
-- Storage status: fetched with --nostore; not written to local archive
+- Storage status: persisted via resolver live capture (structurer DB)
 
 ## Summary
 
@@ -34,11 +35,13 @@ DASHI investigates whether efficient learning systems can discover optimal repre
 2. V5 operator prototype (use formalism as the concrete spec).
 3. Visualization pipeline (surface emergent geometry).
 
+Formalism outline captured in `FORMALISM_OUTLINE.md`.
+
 ## Parallel Goals (Active)
 
 1. Implement the prime-based learner with DASHI.
 2. Implement the prime learner on the same grokking problem for direct performance comparison.
-3. (Pending: clarify the missing third goal.)
+3. Visualize/compare resultant geometry between prime-based and DASHI-based learners, and test prime methods on physics/HEP-style data to see if geometry is more optimal and whether DASHI converges to similar structure.
 
 ## Geometry-After-Grok Experiment (High Signal / Low Overhead)
 
@@ -90,6 +93,10 @@ Relevant but not yet cloned repositories/systems to include in scope:
 - https://github.com/exo-explore/exo.git
 - https://github.com/bigscience-workshop/petals.git
 - Bittensor (protocol/ecosystem reference)
+
+## Decentralized ML Note (Latest)
+
+The conversation now includes a concrete direction for making Bittensor/Petals/Exo viable at IPFS/blockchain scales by shifting from tensor transfer to compact descriptors (generator seeds, canonical IDs, sparse residuals) with cheap local reconstruction and verification.
 
 ## Notes
 

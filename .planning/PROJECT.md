@@ -29,6 +29,8 @@ Preserve authoritative context and actionable next steps so research work stays 
 
 The latest thread compares `sovereign-lila-e8` to DASHI, requests a formalism write-up, a 3D visualization pipeline (A/B/C/D), and a v5 operator definition or filament-atom prototype. The conversation was fetched via live fallback and was not stored locally. A concise thesis and a geometry-after-grok experiment were added to guide research direction and evaluation.
 
+Parallel goals now include: (1) DASHI prime-based learner implementation, (2) prime learner benchmark on the grokking task, and (3) geometry comparison between prime-based vs DASHI learners, including testing prime methods on physics/HEP data.
+
 ## Constraints
 
 - **Network**: Live fetch uses session token; local archive may be stale without chat-context-sync.
