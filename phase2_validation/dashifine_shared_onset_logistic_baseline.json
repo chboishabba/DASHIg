@@ -1,0 +1,54 @@
+{
+  "baseline_name": "dashifine_shared_onset_logistic_law",
+  "manual_summary_only": true,
+  "source_repo": "../dashifine",
+  "source_note": "../dashifine/GROKKING_TIME_RESCALING_NOTE.md",
+  "source_artifacts": [
+    "../dashifine/grok_analysis_combined/grok_milestones.csv",
+    "../dashifine/grok_analysis_combined/grok_onset_fit_screen.csv",
+    "../dashifine/grok_analysis_combined/grok_rise_logistic_fitted_t0_fit.csv",
+    "../dashifine/grok_analysis_combined/grok_rise_logistic_fixed_ct50_fit.csv"
+  ],
+  "task": "modular multiplication",
+  "prime": 97,
+  "train_fraction": 0.3,
+  "weight_decays": [0.2, 0.22, 0.24, 0.25, 0.3, 0.35, 0.4],
+  "expected_report_fields": [
+    "task",
+    "architecture",
+    "optimizer",
+    "train_frac",
+    "t_fit",
+    "t50",
+    "t95",
+    "shared_onset_c",
+    "fixed_shared_onset_logistic_mse",
+    "fitted_onset_logistic_mse",
+    "t95_inverse_weight_decay_r2",
+    "alignment_mse_norm_t50",
+    "alignment_mse_norm_t95",
+    "final_train_acc",
+    "final_test_acc",
+    "trajectory_note"
+  ],
+  "accepted_claim": "After time rescaling by t50, onset occurs near a shared normalized location t0 ~= 0.81 * t50 and the post-escape rise is well fit by one shared logistic curve.",
+  "metrics": {
+    "t95_inverse_weight_decay_r2": 0.9976373410738996,
+    "alignment_mse_norm_t50": 5.150011836672701e-05,
+    "alignment_mse_norm_t95": 0.00021471642178932983,
+    "fixed_shared_onset_logistic": {
+      "model": "rise_logistic_norm_t50_fixed_ct50",
+      "k": 12.34619689833151,
+      "x0": 0.19050749921914506,
+      "mse": 0.0003599398250397975,
+      "shared_c": 0.8054802151744889
+    },
+    "fitted_onset_logistic": {
+      "model": "rise_logistic_norm_t50_fitted_t0",
+      "k": 12.343957106398715,
+      "x0": 0.18114050505829873,
+      "mse": 0.00035069122389562224
+    }
+  },
+  "trajectory_note": "The accepted baseline shows stronger collapse under epoch / t50 than epoch / t95 and supports a shared-onset logistic rise rather than a Gompertz upgrade."
+}

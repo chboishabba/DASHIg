@@ -1,18 +1,19 @@
 # Compactified Context
 
-- Conversation: "Repo Comparison: Sovereign-Lila-E8 vs Dashi" (ID: 69a8d3f9-1320-839c-bce8-b355a1f72f3f).
-- Canonical thread ID: f41b37a699acaa8615626ef0f4ae2cf23e4c5116.
-- Storage: persisted to local structurer DB via resolver live capture (2026-03-05).
-- Core outcome: DASHI is framed as more rigorous due to explicit operators, contraction proofs, empirical tests, and Agda formalization.
-- Bridge claim: E8/Leech appear as emergent optimal coding/packing structures inside compression geometry, not as axioms.
-- Pending asks: formalism write-up, 3D visualization pipeline (A/B/C/D), v5 operator definition or minimal filament-atom prototype.
-- Objective summary: build a minimal learner whose compression dynamics discover optimal representations/symmetries faster and with fewer assumptions than alternatives.
-- Scope additions (not yet cloned): exo, petals, and Bittensor.
-- Latest direction: IPFS/blockchain-scale ML should move tensors → compact descriptors (seed/canonical ID + residual) with local reconstruction + verification.
-- Grokking tests present at repo root: `26_grok_critical_scan.py`, `26_grok_sweep_adaptive.py`, `26_grok_sweep_adaptive_spv2.py` (time-to-grok benchmarking scripts).
-- Thesis: DASHI aims to show compression-driven dynamics discover optimal representations/symmetries without hard-coded lattices; evaluate via time-to-grok across paradigms.
-- Priority order: formalism write-up → V5 operator prototype → visualization pipeline.
-- Parallel goals: prime-based learner with DASHI; prime learner on same grokking task; compare resultant geometry vs DASHI (including physics/HEP data).
-- Formalism outline captured in `FORMALISM_OUTLINE.md`.
-- Geometry-after-grok experiment: extract embeddings/hidden activations; analyze distance spectrum, PCA structure, neighbor regularity across pre/post-grok.
-- `temp_dashiQ/` contains new DASHI experiment scripts (closure/signature tests, cone diagnostics, ultrametric checks, HEPData contraction pipeline, orbit utilities).
+- Conversation: `Theorem Assistance` (ID: `6958ff8a-03c8-8321-b906-30e48e412a3a`).
+- Canonical thread ID: `2aec04871d54bda5059cd98155cd7512f13ab503`.
+- Storage: fetched online by UUID on 2026-03-08, persisted to `~/chat_archive.sqlite`, then resolved locally from DB.
+- Repo-level ML framing now lives in `ROADMAP.md`.
+- Core result: near-critical grokking trajectories collapse under time rescaling by `t50`.
+- Strongest invariant: shared onset `t0 ≈ 0.8055 * t50`.
+- Shape claim: after onset shift, the rise is well fit by a shared logistic curve.
+- Fit quality called out in-thread:
+  - fixed onset fit MSE `≈ 0.000360`
+  - per-run onset fit MSE `≈ 0.000351`
+- Current flagship task: write/maintain `GROKKING_TIME_RESCALING_NOTE.md` around this empirical law.
+- Broader ML program: compare compression-first discovery, architectural priors, and observer/entropy analysis.
+- Ownership split: `../dashifine` owns the Phase 1 baseline, this repo owns Phase 2 validation/comparison, and `../dashi_agda` owns broader formalism.
+- Existing repo support: `26_grok_critical_scan.py`, `26_grok_sweep_adaptive.py`, `26_grok_sweep_adaptive_spv2.py`.
+- Important distinction: this repo should consume the accepted Phase 1 law from `../dashifine`, not re-own it.
+- Priority order here: translate LeechTransformer into a valid second-architecture test -> run external validation -> compare paradigms -> geometry/mechanism.
+- Planning change: broader DASHI formalism/visualization work remains relevant background, but it is owned in `../dashi_agda`, not here.

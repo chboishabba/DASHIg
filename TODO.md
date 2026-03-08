@@ -2,32 +2,37 @@
 
 ## Context Sync
 
-- [ ] Decide whether to store the fetched conversation in the local archive (rerun resolver without --nostore or run chat-context-sync).
+- [x] Pull online thread `6958ff8a-03c8-8321-b906-30e48e412a3a` into `~/chat_archive.sqlite` and resolve the canonical local thread.
+- [x] Replace the stale repo-comparison context with the active theorem-assistance/grokking-law thread.
+- [x] Add a repo-level `ROADMAP.md` to reconcile the active grokking thread with the broader ML program in this repo.
+- [x] Record the ownership split: `../dashifine` for Phase 1 baseline, this repo for Phase 2 comparison/validation, and `../dashi_agda` for broader formalism.
 
-## Follow-up Deliverables
+## External Dependency: Phase 1 Baseline (`../dashifine`)
 
-- [ ] Formalism write-up (state space, update, decode) based on Agda modules.
-- [ ] V5 operator definition or minimal Python filament-atom prototype.
-- [ ] 3D visualization pipeline A/B/C/D (continuous field, discrete kernel, contraction flow, orbit animation).
-- [ ] Draft formalism document using `FORMALISM_OUTLINE.md` as the structure.
+- [x] Create `GROKKING_TIME_RESCALING_NOTE.md` as the primary note for the current empirical law.
+- [ ] Import or reference the accepted baseline artifacts from `../dashifine` so this repo has a stable comparison target.
+- [ ] Record the exact baseline report surface expected from upstream: `t50`, `t95`, onset fraction, fit error, and trajectory-shape notes.
 
-## Research Experiments
+## Phase 2: External Validation and Translation
 
-- [ ] Geometry-after-grok analysis: extract embeddings/hidden activations, analyze distance spectrum, PCA projections, and neighbor counts across pre/post-grok.
-- [ ] Triage `temp_dashiQ/` scripts: categorize by experiment type, identify priority runs, and decide which should graduate into a structured pipeline.
+- [ ] Analyze `LeechTransformer/` and identify which parts of its mechanism can be translated into a second-architecture test against the DASHI baseline.
+- [ ] Define the translation target explicitly: what constitutes an apples-to-apples comparison between LeechTransformer behavior and the DASHI baseline from `../dashifine`.
+- [ ] Re-run the law on a second architecture, with `LeechTransformer/` as the default first comparator.
+- [ ] Re-run the law with a second optimizer to test whether the normalized onset/logistic story is optimizer-stable.
+- [ ] Re-run the law on a closely related task to test transfer beyond the original setup.
+- [ ] Standardize a shared report template for all external-validation runs: `t50`, `t95`, onset fraction, fit error, and qualitative trajectory notes.
 
-## Parallel Goals
+## Phase 3: Cross-Paradigm Comparison
 
-- [ ] Implement the prime-based learner with DASHI.
-- [ ] Implement the prime learner on the same grokking task for direct comparison.
-- [ ] Visualize/compare resultant geometry between prime-based and DASHI-based learners; test prime method on physics/HEP data for geometry optimality.
+- [ ] Compare the `../dashifine` compression-first baseline against the translated architectural-prior test in `LeechTransformer/`.
+- [ ] Define a common comparison table covering time-to-generalization, trajectory-law stability, representation geometry, and training sensitivity.
 
-## Scope References (Not Yet Cloned)
+## Phase 4: Geometry and Mechanism
 
-- [ ] Track relevance of https://github.com/exo-explore/exo.git to the distributed/sharded model discussion.
-- [ ] Track relevance of https://github.com/bigscience-workshop/petals.git to distributed inference and comparison points.
-- [ ] Note Bittensor as a protocol/ecosystem reference for distributed model markets.
+- [ ] Evaluate the metastable-escape interpretation against the new collapse law rather than treating it as a standalone story.
+- [ ] Run geometry-after-grok analyses only after at least one external-validation setting reproduces the law.
+- [ ] Use `cognitive-observer-simulation/` as an interpretation/analysis branch rather than as the immediate benchmark driver.
 
-## Decentralized ML Direction
+## External Dependency: Broader DASHI Work (`../dashi_agda`)
 
-- [ ] Sketch protocol for descriptor-based activation transfer (canonical ID + sparse residual) for IPFS/blockchain-scale Bittensor/Petals/Exo.
+- [ ] Hand validated ML findings back to `../dashi_agda` once the comparison work here is mature enough to inform the formal track.

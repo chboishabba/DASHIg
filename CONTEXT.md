@@ -2,103 +2,130 @@
 
 This file captures the canonical context for the ChatGPT thread:
 
-- Title: Repo Comparison: Sovereign-Lila-E8 vs Dashi
-- Conversation ID: 69a8d3f9-1320-839c-bce8-b355a1f72f3f
-- Canonical thread ID: f41b37a699acaa8615626ef0f4ae2cf23e4c5116
-- Fetched via: live fallback (re-gpt --view) + persisted to local structurer DB
-- Date captured: 2026-03-05
-- Storage status: persisted via resolver live capture (structurer DB)
+- Title: Theorem Assistance
+- Conversation ID: 6958ff8a-03c8-8321-b906-30e48e412a3a
+- Canonical thread ID: 2aec04871d54bda5059cd98155cd7512f13ab503
+- Fetched via: direct online UUID pull into local structurer DB, then DB-first resolver lookup
+- Date captured: 2026-03-08
+- Storage status: persisted in `~/chat_archive.sqlite`
 
 ## Summary
 
-The thread centers on a technical comparison between the `sovereign-lila-e8` repository and DASHI, followed by requests to formalize DASHI concepts and outline visualization/physics operator prototypes. Key outputs include:
+The current canonical thread is focused on the grokking experiments in this repo, not the earlier DASHI-vs-E8 comparison thread. The live endpoint of the conversation identifies a cleaner empirical law for near-critical grokking trajectories:
 
-- A structured comparison of mathematical foundations, state/geometry, dynamics, information theory, physics claims, formal verification, and implementation architecture, with the conclusion that DASHI is more rigorous due to explicit operators, contraction proofs, empirical tests, and Agda formalization.
-- A proposed bridge: E8 appears as an emergent optimal coding/packing structure inside a compression geometry, not as a fundamental axiom.
-- A request to write out the DASHI formalism (state space, dynamics, MDL layer, contraction framework) as a clean, consolidated specification derived from Agda modules.
-- A request to build a 3D visualization pipeline covering:
-  - A) continuous scalar field isosurface
-  - B) discrete ternary kernel embedding
-  - C) contraction flow visualization
-  - D) orbit animation
-- A request to specify the v5 operator definition explicitly (state space, update, decode), or to sketch a minimal Python prototype where vorticity filaments are atoms (not pixels).
-- An explanation of the MDL -> codes -> sphere packings -> exceptional lattices bridge, and a concise summary of the project objective:
-  - Build a minimal learner whose compression dynamics discover optimal representations and symmetries faster and with fewer assumptions than alternative symmetry-first or arithmetic-generator approaches.
+- Test-accuracy trajectories collapse when time is rescaled by `t50`.
+- The onset of rapid generalization is well approximated by one shared normalized location:
+  - `t0 ≈ 0.8055 * t50`
+- After that onset shift, the rise is well fit by a shared logistic curve.
+- The fixed-onset and per-run-onset fits have nearly identical error:
+  - `grok_rise_logistic_fixed_ct50_fit.csv`: `c ≈ 0.8055`, `mse ≈ 0.000360`
+  - `grok_rise_logistic_fitted_t0_fit.csv`: `mse ≈ 0.000351`
 
-## Thesis (Researcher-Facing, 2–3 Sentences)
+The thread treats this as the strongest current result because it upgrades the claim from "late generalization curves look similar" to a quantitative trajectory law with a shared normalized clock and a shared post-onset rise shape.
 
-DASHI investigates whether efficient learning systems can discover optimal representations through compression dynamics rather than hard-coded symmetry. The hypothesis is that contraction, canonicalization, and MDL-style pressures naturally lead to stable invariant structures—potentially rediscovering optimal codes, sphere packings, and exceptional symmetries (e.g., E8 or Leech) without embedding them architecturally. Evaluation focuses on “time-to-grok” and related efficiency metrics across paradigms that discover, generate, or impose symmetry.
+At repo level, this now sits inside a broader machine-learning comparison program captured in `ROADMAP.md`. The overall agenda is to compare:
 
-## Recommended Next Steps (Order)
+- compression-first structure discovery (`DASHI` / grokking work at repo root)
+- architectural-prior structure injection (`LeechTransformer/`)
+- observer/entropy geometry analysis (`cognitive-observer-simulation/`)
 
-1. Formalism write-up (state space, update, decode).
-2. V5 operator prototype (use formalism as the concrete spec).
-3. Visualization pipeline (surface emergent geometry).
+Ownership split:
 
-Formalism outline captured in `FORMALISM_OUTLINE.md`.
+- `../dashifine` owns the upstream Phase 1 baseline for the grokking law
+- this repo owns the external-validation and comparison work
+- `../dashi_agda` owns the broader DASHI formalism track
 
-## Parallel Goals (Active)
+## Flagship Empirical Law
 
-1. Implement the prime-based learner with DASHI.
-2. Implement the prime learner on the same grokking problem for direct performance comparison.
-3. Visualize/compare resultant geometry between prime-based and DASHI-based learners, and test prime methods on physics/HEP-style data to see if geometry is more optimal and whether DASHI converges to similar structure.
+For weight decay `lambda` in the near-critical regime:
 
-## Geometry-After-Grok Experiment (High Signal / Low Overhead)
+`A_test(t; lambda) ≈ F(t / t50(lambda))`
 
-Goal: determine whether grokked representations exhibit code-like geometry (regular distances, clusters, lattice-like structure), supporting the compression → symmetry hypothesis.
+with a shared normalized onset
 
-Suggested probes:
+`t0 / t50 ≈ 0.8055`
 
-- Extract embedding vectors and/or hidden activations after grokking.
-- Analyze pairwise distance spectrum, PCA projections, and neighbor counts.
-- Compare early training vs pre-grok plateau vs post-grok to visualize the transition.
+and a shared post-onset logistic rise.
 
-This provides a direct empirical test of whether compression dynamics yield structured representations, and can be applied to baseline MLP vs lattice-biased vs DASHI operator models.
+Interpretation:
 
-## Grokking Test Scripts (Project Root)
+- `t50` is the natural clock of the late generalization dynamics.
+- Weight decay mainly rescales time rather than changing the curve family.
+- The onset of the escape into generalization occurs at a nearly fixed fraction of that clock.
 
-These scripts implement the grokking tests referenced in the conversation and provide an empirical handle on "time-to-grok" as a proxy for compression discovery speed.
+## Repo-Level ML Goal
+
+The broad ML goal in this repo is to compare different routes to structure and symmetry in learning systems:
+
+- discover it through compression-driven dynamics
+- inject it as an architectural prior
+- analyze it through entropy/observer geometry
+
+The active grokking-law thread is therefore the current benchmark layer, not the entire project. For this repo, it is an upstream input into Phase 2 rather than locally owned work.
+
+## Latest Priorities
+
+The latest user-side update in the fetched thread states that the best next step is:
+
+1. Fold the empirical law directly into `GROKKING_TIME_RESCALING_NOTE.md`.
+2. Treat that note as the flagship documentation artifact for the result.
+3. Continue with mechanism work only after the descriptive law is written down cleanly.
+4. After local reproduction, prioritize external validation on:
+   - a second architecture
+   - a second optimizer
+   - a closely related task
+
+For this repo, the working interpretation is:
+
+- Phase 1 is already handled in `../dashifine`
+- the main job here is to translate `LeechTransformer/` into an appropriate second-architecture test against the DASHI baseline
+
+## Repo-Relevant State
+
+Current local scripts that support this line of work:
 
 - `26_grok_critical_scan.py`
-  - Purpose: critical weight-decay scan around the grokking transition at `p=97`, plus cross-prime sanity checks (`p=47`, `p=193`).
-  - Outputs: `grok_critical_scan.csv` with `t_fit` (train 0.99) and `t95` (test 0.95) epochs.
-  - Relevance: estimates transition sensitivity vs weight decay, supporting the “time-to-grok” benchmark for comparison.
-
+  - Tracks `t95` across near-critical weight decays and cross-prime checks.
 - `26_grok_sweep_adaptive.py`
-  - Purpose: adaptive two-stage scan (coarse → fine) to locate the minimum weight decay that produces grokking at `p=97`.
-  - Outputs: `grok_sweep_adaptive.csv` with `t_fit` and `t95`.
-  - Relevance: quickly narrows the grokking threshold region for repeated benchmarking.
-
+  - Narrows the grokking threshold region.
 - `26_grok_sweep_adaptive_spv2.py`
-  - Purpose: CLI-configurable scan with device control, deterministic option, and CSV output for longer sweeps (defaults: `p=97`, `epochs=40000`).
-  - Outputs: `grok_sweep_gpu.csv` (default) with final train/test accuracy and `t_fit`/`t95`.
-  - Relevance: supports reproducible, parameterized grokking sweeps on CPU/GPU for direct comparisons across approaches.
+  - Parameterized scan for longer reproducible sweeps.
 
-## temp_dashiQ Scripts (New Additions)
+These scripts already support the broad "time-to-grok" benchmarking story, but the current repo did not yet contain the flagship note or documentation for the stronger `t50`/shared-onset logistic law.
 
-Added a batch of analysis/experiment scripts under `temp_dashiQ/`. These appear to cover DASHI operator closure, signature/cone tests, ultrametric checks, and HEPData-related contraction/geometry analyses. They should be treated as the current experimental sandbox for validating operator dynamics and geometric invariants.
+## Roadmap Position
 
-Key clusters (representative files):
+The current intended phase ordering is:
 
-- Closure/signature/defect diagnostics: `26_dashi_closure_tests.py`, `26_dashi_defect_monotonicity.py`, `26_dashi_signature_elim.py`, `26_reduced_closure_signature_test.py`, `26_signature_indefinite.py`, `38_signature_stability.py`, `39_isotropy_check.py`.
-- Cone/arrow/robustness experiments: `29_delta_cone_signature_test.py`, `30_delta_cone_signature_diagnose.py`, `31_try_both_delta_cone.py`, `32_try_both_delta_cone_norm.py`, `33_scale_robustness.py`, `34_snap_sweep.py`, `35_arrow_shape_independence.py`.
-- Ultrametric + orthogonal split checks: `36_ultrametric_triangle_check.py`, `37_masked_orthogonal_split_test.py`.
-- HEPData contraction/geometry pipeline: `26_hepdata_iterated_contraction.py`, `26_hepdata_BCD_iterated_contraction*.py`, `26_hepdata_geomvalidation.py`, `26_hepdata_manifold_report.py`, `26_hepdata_beta_dashboard.py`, `26_hepdata_persistence_ternary_cloud.py`, `26_hepdata_test_lyapunov_against_lhc.py`.
-- Orbit and operator utilities: `26_operator_jacobian_v2.py`, `40_generate_orbit_profiles.py`, `26_finish_pipeline.py`.
+1. Take the grokking law from `../dashifine` as the benchmark baseline.
+2. Validate it externally from this repo.
+3. Compare compression-first learning against architectural priors.
+4. Study geometry and mechanism.
+5. Hand broader formalism questions to `../dashi_agda`.
 
-## Scope Additions
+Detailed staging lives in `ROADMAP.md`.
 
-Relevant but not yet cloned repositories/systems to include in scope:
+## Relationship To Older DASHI Context
 
-- https://github.com/exo-explore/exo.git
-- https://github.com/bigscience-workshop/petals.git
-- Bittensor (protocol/ecosystem reference)
+The earlier "Repo Comparison: Sovereign-Lila-E8 vs Dashi" thread remains historically relevant, especially for longer-term DASHI formalism and geometry goals. However, it is no longer the active canonical thread for immediate repo planning. The current active planning surface should prioritize the grokking-law documentation and its follow-on measurements before returning to the broader DASHI formalism stack.
 
-## Decentralized ML Note (Latest)
+## Immediate Follow-On Work
 
-The conversation now includes a concrete direction for making Bittensor/Petals/Exo viable at IPFS/blockchain scales by shifting from tensor transfer to compact descriptors (generator seeds, canonical IDs, sparse residuals) with cheap local reconstruction and verification.
+1. Keep `GROKKING_TIME_RESCALING_NOTE.md` aligned with the accepted Phase 1 baseline coming from `../dashifine`.
+2. Translate `LeechTransformer/` into an appropriate second-architecture comparison against the DASHI baseline rather than relying on repository-level analogy.
+3. Define a shared validation/report surface for:
+   - `t50`
+   - `t95`
+   - onset fraction
+   - fit error
+   - trajectory-shape notes
+4. Treat external validation as the highest-value next scientific test in this repo.
 
 ## Notes
 
-- The resolver initially failed to find the conversation in the local SQLite archive; the successful lookup was via live fallback with an updated session token.
-- If persistent local storage is desired, rerun the resolver without --nostore or refresh archives via chat-context-sync.
+- The thread was fetched online by UUID and persisted into `~/chat_archive.sqlite`, then resolved locally from the DB.
+- Resolved source:
+  - `source = db`
+  - `decision_reason = db_match_found`
+  - `match_type = online_thread_id_exact`
+- Thread title in the archive: `Theorem Assistance`
