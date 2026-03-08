@@ -83,6 +83,24 @@ Highest-value checks:
 
 This is the main job of this repo. External validation matters more than expanding interpretations before the law is tested elsewhere.
 
+Current Phase 2 reading:
+
+- the translated Leech modular classifier clearly solves the task
+- logistic growth still fits better than Gompertz in the current Leech runs
+- the shared normalized onset moves substantially earlier than the baseline (`~0.325` vs `~0.8055`)
+- the inverse-weight-decay timing screen is much noisier than in the baseline
+
+So the immediate next step is not "run longer" and not yet "change optimizer/task". It is an architecture-ablation ladder to determine whether the shifted onset/noisy timing comes from the translated prior strength, the resonance penalty, or the representation basis.
+
+Sub-phase ordering inside Phase 2:
+
+1. Architecture ablation first:
+   - `lambda_geo = 0`
+   - `lambda_geo = 1e-3`
+   - `lambda_geo = 1e-2` control
+2. Second optimizer after at least one Leech variant looks scientifically comparable.
+3. Closely related task after that.
+
 ### Phase 3. Cross-Paradigm Comparison
 
 Goal:
@@ -101,6 +119,7 @@ Shared comparison axes:
 
 - time-to-generalization
 - trajectory-law stability
+- onset fraction / growth-factor stability
 - representation geometry
 - training stability / sensitivity
 
@@ -118,7 +137,8 @@ Work in this phase:
 
 Rule:
 
-- mechanism remains secondary to empirical validation until Phase 2 is completed.
+- mechanism remains secondary to empirical validation until Phase 2 is completed
+- if Leech preserves growth-family evidence but shifts onset/shape, document that as partial transfer rather than forcing a binary success/failure reading
 
 ### Phase 5. Return to Broader DASHI Formalism
 
@@ -139,6 +159,6 @@ Deferred topics:
 ## Current Defaults
 
 - flagship empirical claim: shared-onset logistic law under `t50` normalization
-- immediate next scientific step in this repo: translate `LeechTransformer/` into a valid second-architecture comparison, then run external validation
+- immediate next scientific step in this repo: run the Leech architecture-ablation ladder, then proceed to optimizer/task validation only after that readout
 - mechanism status: metastable delayed plateau is interpretation, not flagship claim
 - roadmap audience: internal research planning for this repo and its embedded comparison projects

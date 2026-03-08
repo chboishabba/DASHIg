@@ -1,7 +1,7 @@
 # Compactified Context
 
-- Conversation: `Theorem Assistance` (ID: `6958ff8a-03c8-8321-b906-30e48e412a3a`).
-- Canonical thread ID: `2aec04871d54bda5059cd98155cd7512f13ab503`.
+- Conversation: `Grokking Valuation Resolution` (ID: `6958b536-7e18-8320-bce9-421436b4ccf2`).
+- Canonical thread ID: `a450d4cb4d0be34146aab4df6898149e2910b472`.
 - Storage: fetched online by UUID on 2026-03-08, persisted to `~/chat_archive.sqlite`, then resolved locally from DB.
 - Repo-level ML framing now lives in `ROADMAP.md`.
 - Core result: near-critical grokking trajectories collapse under time rescaling by `t50`.
@@ -15,5 +15,7 @@
 - Ownership split: `../dashifine` owns the Phase 1 baseline, this repo owns Phase 2 validation/comparison, and `../dashi_agda` owns broader formalism.
 - Existing repo support: `26_grok_critical_scan.py`, `26_grok_sweep_adaptive.py`, `26_grok_sweep_adaptive_spv2.py`.
 - Important distinction: this repo should consume the accepted Phase 1 law from `../dashifine`, not re-own it.
-- Priority order here: translate LeechTransformer into a valid second-architecture test -> run external validation -> compare paradigms -> geometry/mechanism.
+- Current Leech Phase 2 result: logistic still fits better than Gompertz, but the shared onset shifts to `c ≈ 0.3254` and the clean `t95 ~ 1 / wd` screen becomes noisy.
+- Working interpretation: the translated Leech model may preserve part of the growth law while changing the observed onset/shape through basis or channel effects.
+- Priority order here: Leech architecture ablation ladder -> optimizer/task validation -> compare paradigms -> geometry/mechanism.
 - Planning change: broader DASHI formalism/visualization work remains relevant background, but it is owned in `../dashi_agda`, not here.

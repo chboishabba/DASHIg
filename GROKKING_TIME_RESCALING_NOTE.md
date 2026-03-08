@@ -52,11 +52,35 @@ The latest fetched thread references fit outputs that are not currently present 
 
 Until those artifacts are imported or referenced here, this note should treat them as the upstream baseline coming from `../dashifine`, not as locally owned deliverables in this repo.
 
+## Current Phase 2 Leech Readout
+
+The current translated Leech comparison does not reproduce the accepted baseline cleanly, but the latest canonical thread sharpens how to read that failure.
+
+What currently appears true:
+
+- the translated Leech model still groks the modular task
+- a logistic rise still fits better than Gompertz in the current Leech runs
+- the normalized onset shifts substantially earlier than the accepted baseline:
+  - baseline `shared_c ≈ 0.8055`
+  - current Leech `shared_c ≈ 0.3254`
+- the clean inverse-weight-decay timing screen becomes much noisier than in the baseline
+
+So the current reading is not simply "Leech destroyed the law." A better statement is:
+
+- the baseline law does not transfer cleanly under the current translated Leech setup
+- some growth-family evidence may remain
+- the observation channel / basis may be shifting the apparent onset and curve shape
+
+This makes architecture ablation the immediate next step before broader optimizer/task variation.
+
 ## Immediate Next Work
 
-1. Import or reference the accepted Phase 1 baseline from `../dashifine`.
-2. Translate `LeechTransformer/` into an appropriate second-architecture test against that baseline.
-3. Run external validation on:
+1. Keep the accepted Phase 1 baseline from `../dashifine` fixed.
+2. Run the Leech architecture-ablation ladder:
+   - `lambda_geo = 0`
+   - `lambda_geo = 1e-3`
+   - `lambda_geo = 1e-2` control
+3. Only after that, run external validation on:
    - second architecture
    - second optimizer
    - closely related task

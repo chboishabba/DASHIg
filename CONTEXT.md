@@ -2,16 +2,18 @@
 
 This file captures the canonical context for the ChatGPT thread:
 
-- Title: Theorem Assistance
-- Conversation ID: 6958ff8a-03c8-8321-b906-30e48e412a3a
-- Canonical thread ID: 2aec04871d54bda5059cd98155cd7512f13ab503
+- Title: Grokking Valuation Resolution
+- Conversation ID: 6958b536-7e18-8320-bce9-421436b4ccf2
+- Canonical thread ID: a450d4cb4d0be34146aab4df6898149e2910b472
 - Fetched via: direct online UUID pull into local structurer DB, then DB-first resolver lookup
 - Date captured: 2026-03-08
 - Storage status: persisted in `~/chat_archive.sqlite`
 
 ## Summary
 
-The current canonical thread is focused on the grokking experiments in this repo, not the earlier DASHI-vs-E8 comparison thread. The live endpoint of the conversation identifies a cleaner empirical law for near-critical grokking trajectories:
+The current canonical thread is focused on the grokking experiments in this repo, not the earlier DASHI-vs-E8 comparison thread. The thread refines how we should interpret the translated Leech Phase 2 result against the accepted `../dashifine` baseline.
+
+Accepted upstream baseline:
 
 - Test-accuracy trajectories collapse when time is rescaled by `t50`.
 - The onset of rapid generalization is well approximated by one shared normalized location:
@@ -21,7 +23,18 @@ The current canonical thread is focused on the grokking experiments in this repo
   - `grok_rise_logistic_fixed_ct50_fit.csv`: `c ≈ 0.8055`, `mse ≈ 0.000360`
   - `grok_rise_logistic_fitted_t0_fit.csv`: `mse ≈ 0.000351`
 
-The thread treats this as the strongest current result because it upgrades the claim from "late generalization curves look similar" to a quantitative trajectory law with a shared normalized clock and a shared post-onset rise shape.
+Phase 2 Leech update from the fetched thread:
+
+- The translated Leech model still appears better described by a logistic rise than by Gompertz.
+- The current Leech fit does not preserve the baseline shared onset:
+  - baseline `shared_c ≈ 0.8055`
+  - translated Leech `shared_c ≈ 0.3254`
+- The weight-decay timing screen is noisy rather than cleanly absent:
+  - baseline `t95 ~ 1 / wd` `R^2 ≈ 0.9976`
+  - translated Leech `t95 ~ 1 / wd` `R^2 ≈ 0.3866`
+- The working interpretation is therefore not "the law vanished" but "the observation channel / basis changed the apparent onset and degraded the clean collapse."
+
+The thread treats this as a valuation-resolution step: the Leech result is scientifically meaningful even though it does not match the baseline law cleanly. The immediate question is now whether this is structural or an artifact of the current translated prior / prime-base representation.
 
 At repo level, this now sits inside a broader machine-learning comparison program captured in `ROADMAP.md`. The overall agenda is to compare:
 
@@ -98,7 +111,7 @@ These scripts already support the broad "time-to-grok" benchmarking story, but t
 The current intended phase ordering is:
 
 1. Take the grokking law from `../dashifine` as the benchmark baseline.
-2. Validate it externally from this repo.
+2. Validate it externally from this repo, starting with Leech architecture ablations before changing optimizer or task.
 3. Compare compression-first learning against architectural priors.
 4. Study geometry and mechanism.
 5. Hand broader formalism questions to `../dashi_agda`.
@@ -112,14 +125,22 @@ The earlier "Repo Comparison: Sovereign-Lila-E8 vs Dashi" thread remains histori
 ## Immediate Follow-On Work
 
 1. Keep `GROKKING_TIME_RESCALING_NOTE.md` aligned with the accepted Phase 1 baseline coming from `../dashifine`.
-2. Translate `LeechTransformer/` into an appropriate second-architecture comparison against the DASHI baseline rather than relying on repository-level analogy.
-3. Define a shared validation/report surface for:
+2. Treat the current translated Leech result as partial transfer evidence:
+   - logistic family still plausible
+   - shared onset shifted strongly
+   - timing screen much noisier than baseline
+3. Run the architecture-ablation ladder first:
+   - `lambda_geo = 0`
+   - `lambda_geo = 1e-3`
+   - `lambda_geo = 1e-2` control
+4. Only after that, move to second-optimizer and related-task validation.
+5. Define a shared validation/report surface for:
    - `t50`
    - `t95`
    - onset fraction
    - fit error
    - trajectory-shape notes
-4. Treat external validation as the highest-value next scientific test in this repo.
+6. Treat external validation as the highest-value next scientific test in this repo.
 
 ## Notes
 
@@ -128,4 +149,4 @@ The earlier "Repo Comparison: Sovereign-Lila-E8 vs Dashi" thread remains histori
   - `source = db`
   - `decision_reason = db_match_found`
   - `match_type = online_thread_id_exact`
-- Thread title in the archive: `Theorem Assistance`
+- Thread title in the archive: `Grokking Valuation Resolution`

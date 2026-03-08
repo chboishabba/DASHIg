@@ -14,4 +14,8 @@
 - Added `27_leech_grok_critical_scan.py` plus `phase2_validation/leech_modular_benchmark.py` to run a translated Leech modular classifier benchmark with AdamW or SGD, modular multiplication or addition, resonance loss, and trajectory logging.
 - Added `27_leech_trajectory_analysis.py` to reproduce the milestone/fitting surface locally for translated Leech runs, including `t50`/`t95` alignment and shared-onset logistic fits.
 - Added `27_compare_to_dashifine_baseline.py` to generate local CSV/Markdown comparisons against the manually recorded DASHI baseline.
+- Added `28_leech_arch_ablation.py` to orchestrate the Leech `lambda_geo` ablation ladder, run scan/analysis/comparison for each leg, and emit a top-level ablation summary.
 - Updated the translated Leech benchmark runner to expose configurable early stopping (`--grok-thr`, `--grok-patience-logs`) and default to stopping once test accuracy stays at or above `0.97` for 5 logged checkpoints, instead of always running to the maximum epoch budget.
+- Refreshed the canonical repo context to the fetched `Grokking Valuation Resolution` thread (`6958b536-7e18-8320-bce9-421436b4ccf2` / `a450d4cb4d0be34146aab4df6898149e2910b472`).
+- Updated the planning docs to record the current Leech Phase 2 readout as partial transfer rather than simple failure: logistic still fits better than Gompertz, but the shared onset shifts strongly earlier and the inverse-weight-decay timing screen becomes noisy.
+- Reordered the immediate Phase 2 roadmap so Leech architecture ablations (`lambda_geo` ladder) come before second-optimizer and related-task validation.
