@@ -82,6 +82,12 @@ def epoch_or_blank(value: float) -> int | str:
     return int(value) if math.isfinite(value) else ""
 
 
+def parse_optional_float(value: object) -> float:
+    if value in ("", None):
+        return math.nan
+    return float(value)
+
+
 def write_csv(path: Path, fieldnames: List[str], rows: List[Dict[str, object]]) -> None:
     with path.open("w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
@@ -91,6 +97,8 @@ def write_csv(path: Path, fieldnames: List[str], rows: List[Dict[str, object]]) 
 
 
 def fit_linear(xs: List[float], ys: List[float]) -> Tuple[float, float, float]:
+    if not xs or not ys:
+        return math.nan, math.nan, math.nan
     x = np.asarray(xs, dtype=float)
     y = np.asarray(ys, dtype=float)
     xbar = float(np.mean(x))
@@ -134,7 +142,7 @@ def normalized_alignment_mse(
     grid = [i / 20.0 for i in range(21)]
     curves: List[List[float]] = []
     for row in milestones:
-        T = float(row[milestone_field])
+        T = parse_optional_float(row[milestone_field])
         if not math.isfinite(T) or T <= 0:
             continue
         key = (int(row["p"]), float(row["weight_decay"]), int(row["seed"]))
@@ -177,7 +185,7 @@ def plot_normalized(
 ) -> None:
     fig, ax = plt.subplots(figsize=(7, 4.5))
     for row in sorted(milestones, key=lambda r: float(r["weight_decay"])):
-        T = float(row[milestone_field])
+        T = parse_optional_float(row[milestone_field])
         if not math.isfinite(T) or T <= 0:
             continue
         key = (int(row["p"]), float(row["weight_decay"]), int(row["seed"]))
@@ -230,7 +238,7 @@ def normalized_points(
     xs: List[float] = []
     ys: List[float] = []
     for row in milestones:
-        T = float(row[milestone_field])
+        T = parse_optional_float(row[milestone_field])
         if not math.isfinite(T) or T <= 0:
             continue
         key = (int(row["p"]), float(row["weight_decay"]), int(row["seed"]))
@@ -265,7 +273,7 @@ def fit_shape_laws(
     grid = np.linspace(float(np.min(x)), float(np.max(x)), 400)
     fig, ax = plt.subplots(figsize=(7, 4.5))
     for row in sorted(milestones, key=lambda r: float(r["weight_decay"])):
-        T = float(row["t50"])
+        T = parse_optional_float(row["t50"])
         if not math.isfinite(T) or T <= 0:
             continue
         key = (int(row["p"]), float(row["weight_decay"]), int(row["seed"]))
@@ -297,8 +305,8 @@ def fit_shifted_rising_logistic(
     ys: List[float] = []
     per_curve: List[Tuple[float, List[float], List[float]]] = []
     for row in sorted(milestones, key=lambda r: float(r["weight_decay"])):
-        shift_epoch = float(row[shift_field])
-        t50 = float(row["t50"])
+        shift_epoch = parse_optional_float(row[shift_field])
+        t50 = parse_optional_float(row["t50"])
         if not math.isfinite(shift_epoch) or not math.isfinite(t50) or t50 <= 0:
             continue
         key = (int(row["p"]), float(row["weight_decay"]), int(row["seed"]))
@@ -351,8 +359,8 @@ def fit_rising_phase_logistic_fitted_t0(
     curve_data: List[Tuple[float, List[float], List[float]]] = []
     init_offsets: List[float] = []
     for row in sorted(milestones, key=lambda r: float(r["weight_decay"])):
-        t10 = float(row["t10"])
-        t50 = float(row["t50"])
+        t10 = parse_optional_float(row["t10"])
+        t50 = parse_optional_float(row["t50"])
         if not math.isfinite(t10) or not math.isfinite(t50) or t50 <= 0:
             continue
         key = (int(row["p"]), float(row["weight_decay"]), int(row["seed"]))
@@ -418,8 +426,8 @@ def fit_rising_phase_logistic_fixed_ct50(
     curve_data: List[Tuple[float, List[float], List[float]]] = []
     init_cs: List[float] = []
     for row in sorted(milestones, key=lambda r: float(r["weight_decay"])):
-        t10 = float(row["t10"])
-        t50 = float(row["t50"])
+        t10 = parse_optional_float(row["t10"])
+        t50 = parse_optional_float(row["t50"])
         if not math.isfinite(t10) or not math.isfinite(t50) or t50 <= 0:
             continue
         key = (int(row["p"]), float(row["weight_decay"]), int(row["seed"]))
@@ -488,8 +496,8 @@ def fit_rising_phase_loss_logistic(
     ys: List[float] = []
     per_curve: List[Tuple[float, List[float], List[float]]] = []
     for row in sorted(milestones, key=lambda r: float(r["weight_decay"])):
-        t10 = float(row["t10"])
-        t50 = float(row["t50"])
+        t10 = parse_optional_float(row["t10"])
+        t50 = parse_optional_float(row["t50"])
         if not math.isfinite(t10) or not math.isfinite(t50) or t50 <= 0:
             continue
         key = (int(row["p"]), float(row["weight_decay"]), int(row["seed"]))

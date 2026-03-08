@@ -15,6 +15,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--optimizer", choices=["adamw", "sgd"], default="adamw")
     parser.add_argument("--epochs", type=int, default=30000)
     parser.add_argument("--log-every", type=int, default=20)
+    parser.add_argument("--grok-thr", type=float, default=0.97)
+    parser.add_argument("--grok-patience-logs", type=int, default=5)
     parser.add_argument("--seeds", type=int, nargs="+", default=[0])
     parser.add_argument("--weight-decays", type=float, nargs="+", default=[0.20, 0.22, 0.24, 0.25, 0.30, 0.35, 0.40])
     parser.add_argument("--p", type=int, default=97)
@@ -58,6 +60,8 @@ def main() -> None:
                 ff_mult=args.ff_mult,
                 lambda_geo=args.lambda_geo,
                 dropout=args.dropout,
+                grok_thr=args.grok_thr,
+                grok_patience_logs=args.grok_patience_logs,
                 device=device,
             )
             summary, trajectory = run_one(cfg)
@@ -65,12 +69,14 @@ def main() -> None:
             trajectories.extend(trajectory)
             print(
                 f"task={args.task} opt={args.optimizer} wd={weight_decay:<4} seed={seed:<2} "
-                f"t50={summary['t50']} t95={summary['t95']} "
+                f"t50={summary['t50']} t95={summary['t95']} stop={summary['stop_epoch']} "
                 f"train={summary['final_train_acc']:.3f} test={summary['final_test_acc']:.3f}"
             )
 
     summary_path = Path(f"{args.out_prefix}.csv")
     traj_path = Path(f"{args.out_prefix}_trajectories.csv")
+    summary_path.parent.mkdir(parents=True, exist_ok=True)
+    traj_path.parent.mkdir(parents=True, exist_ok=True)
     with summary_path.open("w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
         writer.writeheader()

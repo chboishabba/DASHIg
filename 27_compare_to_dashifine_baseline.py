@@ -16,21 +16,26 @@ def read_fit_metric(rows: List[Dict[str, str]], model: str, key: str) -> float:
     for row in rows:
         if row["model"] == model and row.get(key, "") != "":
             return float(row[key])
-    raise KeyError(f"missing {model}:{key}")
+    return float("nan")
 
 
 def load_local_metrics(analysis_dir: Path, summary_csv: Path, label: str, task: str, optimizer: str) -> Dict[str, object]:
     onset_rows = read_csv_rows(analysis_dir / "grok_onset_fit_screen.csv")
-    fixed_rows = read_csv_rows(analysis_dir / "grok_rise_logistic_fixed_ct50_fit.csv")
-    fitted_rows = read_csv_rows(analysis_dir / "grok_rise_logistic_fitted_t0_fit.csv")
+    fixed_path = analysis_dir / "grok_rise_logistic_fixed_ct50_fit.csv"
+    fitted_path = analysis_dir / "grok_rise_logistic_fitted_t0_fit.csv"
+    fixed_rows = read_csv_rows(fixed_path) if fixed_path.exists() else []
+    fitted_rows = read_csv_rows(fitted_path) if fitted_path.exists() else []
     milestone_rows = read_csv_rows(analysis_dir / "grok_milestones.csv")
     summary_rows = read_csv_rows(summary_csv)
 
     mean_train = sum(float(row["final_train_acc"]) for row in summary_rows) / len(summary_rows)
     mean_test = sum(float(row["final_test_acc"]) for row in summary_rows) / len(summary_rows)
-    mean_tfit = sum(float(row["t_fit"]) for row in milestone_rows if row["t_fit"]) / max(1, sum(1 for row in milestone_rows if row["t_fit"]))
-    mean_t50 = sum(float(row["t50"]) for row in milestone_rows) / len(milestone_rows)
-    mean_t95 = sum(float(row["t95"]) for row in milestone_rows) / len(milestone_rows)
+    tfit_vals = [float(row["t_fit"]) for row in milestone_rows if row["t_fit"]]
+    t50_vals = [float(row["t50"]) for row in milestone_rows if row["t50"]]
+    t95_vals = [float(row["t95"]) for row in milestone_rows if row["t95"]]
+    mean_tfit = sum(tfit_vals) / len(tfit_vals) if tfit_vals else float("nan")
+    mean_t50 = sum(t50_vals) / len(t50_vals) if t50_vals else float("nan")
+    mean_t95 = sum(t95_vals) / len(t95_vals) if t95_vals else float("nan")
 
     return {
         "label": label,

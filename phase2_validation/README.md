@@ -47,3 +47,4 @@ Every Phase 2 validation leg should report:
 - second architecture: translated Leech modular classifier
 - second optimizer: SGD with momentum
 - related task: modular addition
+- early stop: stop after 5 logged checkpoints at or above test accuracy `0.97`

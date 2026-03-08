@@ -10,17 +10,18 @@
 ## External Dependency: Phase 1 Baseline (`../dashifine`)
 
 - [x] Create `GROKKING_TIME_RESCALING_NOTE.md` as the primary note for the current empirical law.
-- [ ] Import or reference the accepted baseline artifacts from `../dashifine` so this repo has a stable comparison target.
-- [ ] Record the exact baseline report surface expected from upstream: `t50`, `t95`, onset fraction, fit error, and trajectory-shape notes.
+- [x] Import or reference the accepted baseline artifacts from `../dashifine` so this repo has a stable comparison target.
+- [x] Record the exact baseline report surface expected from upstream: `t50`, `t95`, onset fraction, fit error, and trajectory-shape notes.
 
 ## Phase 2: External Validation and Translation
 
-- [ ] Analyze `LeechTransformer/` and identify which parts of its mechanism can be translated into a second-architecture test against the DASHI baseline.
-- [ ] Define the translation target explicitly: what constitutes an apples-to-apples comparison between LeechTransformer behavior and the DASHI baseline from `../dashifine`.
+- [x] Analyze `LeechTransformer/` and identify which parts of its mechanism can be translated into a second-architecture test against the DASHI baseline.
+- [x] Define the translation target explicitly: what constitutes an apples-to-apples comparison between LeechTransformer behavior and the DASHI baseline from `../dashifine`.
+- [x] Add the translated Leech modular benchmark harness, local trajectory analysis, and baseline comparison scripts.
 - [ ] Re-run the law on a second architecture, with `LeechTransformer/` as the default first comparator.
 - [ ] Re-run the law with a second optimizer to test whether the normalized onset/logistic story is optimizer-stable.
 - [ ] Re-run the law on a closely related task to test transfer beyond the original setup.
-- [ ] Standardize a shared report template for all external-validation runs: `t50`, `t95`, onset fraction, fit error, and qualitative trajectory notes.
+- [x] Standardize a shared report template for all external-validation runs: `t50`, `t95`, onset fraction, fit error, and qualitative trajectory notes.
 
 ## Phase 3: Cross-Paradigm Comparison
 

@@ -37,7 +37,7 @@ class LeechBenchmarkConfig:
     dropout: float = 0.0
     lambda_geo: float = 0.01
     resonance_threshold: float = 0.95
-    grok_thr: float = 0.95
+    grok_thr: float = 0.97
     grok_patience_logs: int = 5
     device: str = "cpu"
 
@@ -262,6 +262,7 @@ def run_one(cfg: LeechBenchmarkConfig) -> Tuple[Dict[str, object], List[Dict[str
     test_total_loss_log: List[float] = []
     train_res_log: List[float] = []
     test_res_log: List[float] = []
+    stop_epoch: int | None = None
 
     for epoch in range(1, cfg.epochs + 1):
         model.train()
@@ -286,6 +287,7 @@ def run_one(cfg: LeechBenchmarkConfig) -> Tuple[Dict[str, object], List[Dict[str
 
             if len(test_acc_log) >= cfg.grok_patience_logs:
                 if min(test_acc_log[-cfg.grok_patience_logs :]) >= cfg.grok_thr:
+                    stop_epoch = epoch
                     break
 
     summary = {
@@ -304,9 +306,13 @@ def run_one(cfg: LeechBenchmarkConfig) -> Tuple[Dict[str, object], List[Dict[str
         "n_layers": cfg.n_layers,
         "ff_mult": cfg.ff_mult,
         "lambda_geo": cfg.lambda_geo,
+        "grok_thr": cfg.grok_thr,
+        "grok_patience_logs": cfg.grok_patience_logs,
         "t_fit": first_epoch_at_or_none(epochs_logged, train_acc_log, 0.99),
         "t50": first_epoch_at_or_none(epochs_logged, test_acc_log, 0.50),
         "t95": first_epoch_at_or_none(epochs_logged, test_acc_log, 0.95),
+        "stop_epoch": stop_epoch if stop_epoch is not None else epochs_logged[-1],
+        "stopped_early": stop_epoch is not None,
         "final_train_loss": train_loss_log[-1],
         "final_test_loss": test_loss_log[-1],
         "final_train_total_loss": train_total_loss_log[-1],
@@ -347,6 +353,7 @@ def run_one(cfg: LeechBenchmarkConfig) -> Tuple[Dict[str, object], List[Dict[str
                 "seed": cfg.seed,
                 "p": cfg.p,
                 "weight_decay": float(cfg.weight_decay),
+                "grok_thr": cfg.grok_thr,
                 "epoch": epoch,
                 "train_loss": train_loss,
                 "test_loss": test_loss,
