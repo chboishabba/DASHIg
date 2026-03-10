@@ -1,0 +1,3 @@
+weight_decay,seed,value_field,sample_spacing_epochs,dominant_period_epochs,dominant_frequency_per_epoch,peak_power_ratio,n_points
+0.22,0,test_loss,20.0,147.6,0.006775067750677507,0.04360950662325935,369
+0.3,0,test_loss,20.0,193.92857142857144,0.005156537753222836,0.04481091366960937,543

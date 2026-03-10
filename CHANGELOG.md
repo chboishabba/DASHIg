@@ -27,3 +27,9 @@
 - Reframed the immediate next step as finishing the representative-band prelims (`lambda_geo = 1e-3` and plain standard baseline) before deciding whether the full overnight ladder is worth the cost.
 - Recorded the neutral plain-transformer prelim on the same representative band (`wd = 0.22, 0.30`): it also groks cleanly, has `shared_c ≈ 0.340`, and is competitive with the `lambda_geo = 0` Leech prelim rather than obviously dominated by it.
 - Narrowed the next decision point again: run the `lambda_geo = 1e-3` Leech prelim, then compare all representative-band readouts before making strong outreach or speedup claims.
+- Added `32_fft_spike_analysis.py` and ran a first FFT spike test on the local modular `test_loss` trajectories.
+- Recorded that first FFT result as non-distinctive: Leech and the neutral plain baseline both show similar low-frequency components on the local prelim runs, so the current data does not isolate a unique Leech resonance frequency.
+- Added `33_logistic_derivative_analysis.py` and ran a first derivative-shape analysis on the local normalized growth curves.
+- Recorded that derivative result as more informative than FFT: both models show bell-shaped normalized rise profiles, and Leech peaks slightly earlier on average on the current tiny slice, but the sample is too small for strong shared-family claims.
+- Extended `33_logistic_derivative_analysis.py` to emit slope proxy, pre-`t50` derivative area/fraction, and one-row summary outputs suitable for cross-configuration comparison.
+- Added `34_derivative_comparison_table.py` to combine derivative summary rows into a compact representative-band comparison table.

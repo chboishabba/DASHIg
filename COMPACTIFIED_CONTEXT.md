@@ -25,7 +25,15 @@
   - fixed logistic MSE `≈ 0.0228`
   - fitted logistic MSE `≈ 0.0223`
 - Current comparison: on this tiny slice, Leech is not obviously dominating a neutral standard baseline; the plain baseline is in the same runtime/timing regime and even fits the logistic family slightly more cleanly.
+- FFT check on current local `test_loss` trajectories does not show a unique long-period Leech resonance:
+  - Leech low-frequency dominant periods are about `696` to `910` epochs
+  - plain baseline low-frequency dominant periods are about `724` to `820` epochs
+  - both are weak/moderate and broadly similar
+- Derivative-shape check on normalized growth curves is more informative:
+  - both Leech and plain baseline show bell-shaped rise profiles after `t50` normalization
+  - Leech mean derivative peak is slightly earlier on this tiny slice (`~1.07`) than the plain baseline (`~1.27`)
+  - shape correlations within each two-run set are moderate (`~0.76`), so the evidence is suggestive rather than decisive
 - Current takeaway: removing the geometric penalty alone did not recover baseline-like timing; basis/architecture effects still look live.
 - Working interpretation: the translated Leech model may preserve part of the growth law while changing the observed onset/shape through basis or channel effects.
-- Priority order here: finish the `lambda_geo = 1e-3` Leech prelim -> compare all three representative-band prelims side by side -> decide whether the full ladder is worth the overnight cost -> then optimizer/task validation.
+- Priority order here: finish the `lambda_geo = 1e-3` Leech prelim -> compare all representative-band readouts, including FFT, side by side -> decide whether the full ladder is worth the overnight cost -> then optimizer/task validation.
 - Planning change: broader DASHI formalism/visualization work remains relevant background, but it is owned in `../dashi_agda`, not here.

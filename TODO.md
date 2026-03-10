@@ -35,6 +35,15 @@
 - [x] Add a short prelim entrypoint for the neutral standard baseline so it can be screened on the representative weight-decay slice quickly.
 - [x] Run the neutral standard-baseline prelim on `wd = 0.22, 0.30` and compare it against both the accepted `../dashifine` baseline and the Leech prelims before outreach or strong speedup claims.
 - [x] Record the current standard-baseline prelim result: it is competitive with the `lambda_geo = 0` Leech prelim on the representative slice, so there is no strong standard-baseline dominance claim yet.
+- [x] Run an FFT spike test on the current local Leech and plain-baseline `test_loss` trajectories.
+- [x] Record the FFT result: both local models show broadly similar low-frequency components, so there is no distinctive Leech-only spike spacing signal on the current modular runs.
+- [ ] Run derivative-shape analysis on the current normalized growth curves to test whether Leech and the plain baseline share a common bell-shaped rise profile even when spike structure differs.
+- [x] Run derivative-shape analysis on the current normalized growth curves for the Leech and plain representative-band prelims.
+- [x] Record the derivative result: both models show bell-shaped normalized rise profiles, and Leech peaks slightly earlier on average on the current tiny slice, but the sample is too small for strong universality claims.
+- [x] Extend derivative-shape analysis to emit pre-`t50` area, slope proxy, and a compact summary row suitable for a 4-way representative-band comparison table.
+- [x] Add a compact derivative-comparison table tool for `lambda_geo = 0`, `1e-3`, `1e-2`, and plain-baseline summaries.
+- [ ] If external raw step-level E8/Leech logs are obtained, rerun the FFT spike test on those logs directly.
+- [ ] Extend derivative-shape analysis to the broader Leech/plain/DASHI comparison surface if the full ladder is run.
 - [ ] Use the `lambda_geo = 0`, `lambda_geo = 1e-3`, `lambda_geo = 1e-2`, and plain-baseline representative-band results to decide whether the full overnight ladder is justified.
 - [ ] Re-run the law with a second optimizer after at least one Leech ablation leg looks scientifically comparable.
 - [ ] Re-run the law on a closely related task after the architecture question is cleaner.

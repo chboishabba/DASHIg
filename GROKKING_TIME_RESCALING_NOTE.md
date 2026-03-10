@@ -95,11 +95,35 @@ What the neutral standard-baseline prelim adds:
   - fitted logistic MSE `≈ 0.0223`
 - on this small slice, it is in the same broad timing regime as the Leech prelim rather than being obviously dominated by it
 
+What the first FFT spike test adds:
+
+- using the current local `test_loss` trajectories, both Leech and the plain baseline show low-frequency components, but they are broadly similar rather than clearly architecture-specific
+- Leech prelim low-frequency dominant periods land around `696` to `910` epochs
+- plain-baseline low-frequency dominant periods land around `724` to `820` epochs
+- so, on the data currently in hand, FFT does not yet support a distinctive Leech-only spike frequency story
+
+This is not a strong negative result against the external E8/Leech claim, because:
+
+- these are local modular benchmark runs, not the long external lattice-language runs
+- logging is every `20` epochs rather than every training step
+- and the representative-band prelims are much shorter than the `140k+` step regime discussed externally
+
+What the first derivative-shape test adds:
+
+- the normalized rise profiles for both Leech and the plain baseline are much more interpretable than the FFT output
+- both look broadly bell-shaped after `t50` normalization, which is consistent with a logistic-like underlying transition plus non-periodic instability spikes
+- on the current tiny slice, Leech's mean derivative peak lands slightly earlier than the plain baseline:
+  - Leech mean `peak_x ≈ 1.07`
+  - plain baseline mean `peak_x ≈ 1.27`
+- but the sample is only two runs per model, and the within-model shape correlations are only moderate (`~0.76`), so this is not yet strong evidence for a universal shared derivative family
+
 So, from the data currently in hand, there is not yet a strong basis for an outreach claim like "Leech is almost 10x better than DASHI and clearly better than a standard baseline." The current evidence is narrower:
 
 - both translated Leech and a neutral standard baseline generalize much earlier than the accepted DASHI baseline on this representative slice
 - neither currently reproduces the DASHI timing law
 - and the neutral standard baseline is competitive with the Leech prelim on the same slice
+- the first FFT spike test does not isolate a unique Leech resonance signature on the local modular runs
+- the derivative-shape test is more promising than FFT and is consistent with the idea that the invariant may be the growth curve rather than the spikes
 
 ## Immediate Next Work
 
@@ -114,6 +138,8 @@ So, from the data currently in hand, there is not yet a strong basis for an outr
    - second architecture
    - second optimizer
    - closely related task
+7. If external raw step-level E8/Leech logs become available, rerun the FFT spike test on those logs directly rather than extrapolating from the local modular harness.
+8. Extend the derivative-shape analysis to compare Leech, plain baseline, and the accepted DASHI baseline on a larger scan before making universality claims.
 
 ## Boundaries
 

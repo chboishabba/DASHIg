@@ -1,0 +1,2 @@
+label,mean_peak_x,std_peak_x,mean_slope_proxy_k,mean_half_max_width,mean_pre_t50_area,mean_pre_t50_fraction,mean_skew,mean_gaussian_mse,mean_corr_to_mean,n_runs
+plain_baseline,1.2712500000000002,0.27375000000000005,56.44688505785779,1.3350000000000002,0.9337200304945674,0.5572736140997453,-0.3341470893166095,83.57066395087608,0.7668887699554757,2
