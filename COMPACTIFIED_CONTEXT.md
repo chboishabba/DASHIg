@@ -16,6 +16,16 @@
 - Existing repo support: `26_grok_critical_scan.py`, `26_grok_sweep_adaptive.py`, `26_grok_sweep_adaptive_spv2.py`.
 - Important distinction: this repo should consume the accepted Phase 1 law from `../dashifine`, not re-own it.
 - Current Leech Phase 2 result: logistic still fits better than Gompertz, but the shared onset shifts to `c ≈ 0.3254` and the clean `t95 ~ 1 / wd` screen becomes noisy.
+- `lambda_geo = 0` prelim on `wd = 0.22, 0.30` still groks cleanly but does not restore the DASHI onset law:
+  - shared onset `c ≈ 0.3893`
+  - fixed logistic MSE `≈ 0.0292`
+  - fitted logistic MSE `≈ 0.0238`
+- Neutral plain-transformer prelim on the same `wd = 0.22, 0.30` slice also groks cleanly:
+  - shared onset `c ≈ 0.3397`
+  - fixed logistic MSE `≈ 0.0228`
+  - fitted logistic MSE `≈ 0.0223`
+- Current comparison: on this tiny slice, Leech is not obviously dominating a neutral standard baseline; the plain baseline is in the same runtime/timing regime and even fits the logistic family slightly more cleanly.
+- Current takeaway: removing the geometric penalty alone did not recover baseline-like timing; basis/architecture effects still look live.
 - Working interpretation: the translated Leech model may preserve part of the growth law while changing the observed onset/shape through basis or channel effects.
-- Priority order here: Leech architecture ablation ladder -> optimizer/task validation -> compare paradigms -> geometry/mechanism.
+- Priority order here: finish the `lambda_geo = 1e-3` Leech prelim -> compare all three representative-band prelims side by side -> decide whether the full ladder is worth the overnight cost -> then optimizer/task validation.
 - Planning change: broader DASHI formalism/visualization work remains relevant background, but it is owned in `../dashi_agda`, not here.

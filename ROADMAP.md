@@ -78,6 +78,7 @@ Goal:
 Highest-value checks:
 
 - second architecture via `LeechTransformer/`
+- neutral industry-standard baseline
 - second optimizer
 - closely related task
 
@@ -89,8 +90,24 @@ Current Phase 2 reading:
 - logistic growth still fits better than Gompertz in the current Leech runs
 - the shared normalized onset moves substantially earlier than the baseline (`~0.325` vs `~0.8055`)
 - the inverse-weight-decay timing screen is much noisier than in the baseline
+- the first `lambda_geo = 0` prelim on `wd = 0.22, 0.30` does not restore the baseline law:
+  - `shared_c ≈ 0.389`
+  - fixed logistic MSE `≈ 0.0292`
+  - fitted logistic MSE `≈ 0.0238`
+  - both points still grok cleanly
+- the neutral plain-transformer prelim on the same slice also groks cleanly:
+  - `shared_c ≈ 0.340`
+  - fixed logistic MSE `≈ 0.0228`
+  - fitted logistic MSE `≈ 0.0223`
+  - it is in the same broad timing regime as the Leech prelim, not an obviously dominated baseline
 
-So the immediate next step is not "run longer" and not yet "change optimizer/task". It is an architecture-ablation ladder to determine whether the shifted onset/noisy timing comes from the translated prior strength, the resonance penalty, or the representation basis.
+Important boundary on that prelim:
+
+- the apparent `t95 ~ 1 / wd` `R^2 = 1.0` is from only two points and should not be treated as evidence of a clean recovered screen
+
+So the immediate next step is still not "run longer" and not yet "change optimizer/task". The `lambda_geo = 0` prelim suggests resonance penalty alone is not the whole story, and the neutral baseline prelim means there is not yet a strong case that Leech is uniquely faster than standard architectures on this slice. The next discriminating check is therefore:
+
+- `lambda_geo = 1e-3` prelim on the same representative band
 
 Sub-phase ordering inside Phase 2:
 
@@ -98,8 +115,12 @@ Sub-phase ordering inside Phase 2:
    - `lambda_geo = 0`
    - `lambda_geo = 1e-3`
    - `lambda_geo = 1e-2` control
-2. Second optimizer after at least one Leech variant looks scientifically comparable.
-3. Closely related task after that.
+2. Neutral standard baseline on the same modular benchmark surface:
+   - plain small transformer or MLP
+   - same task, split, optimizer family, and report surface
+3. Use the three representative-band prelims (`lambda_geo = 0`, `lambda_geo = 1e-3`, plain baseline) to decide whether the full overnight ladder is justified before spending that runtime.
+4. Second optimizer after at least one Leech or standard-baseline result looks scientifically comparable.
+5. Closely related task after that.
 
 ### Phase 3. Cross-Paradigm Comparison
 
@@ -117,6 +138,7 @@ Required comparison step:
 
 Shared comparison axes:
 
+- relative speedup against a neutral standard baseline
 - time-to-generalization
 - trajectory-law stability
 - onset fraction / growth-factor stability
@@ -159,6 +181,6 @@ Deferred topics:
 ## Current Defaults
 
 - flagship empirical claim: shared-onset logistic law under `t50` normalization
-- immediate next scientific step in this repo: run the Leech architecture-ablation ladder, then proceed to optimizer/task validation only after that readout
+- immediate next scientific step in this repo: finish the `lambda_geo = 1e-3` representative-band Leech prelim, then compare it against the existing `lambda_geo = 0`, `lambda_geo = 1e-2`, and plain-baseline readouts before making strong external claims about relative speedups
 - mechanism status: metastable delayed plateau is interpretation, not flagship claim
 - roadmap audience: internal research planning for this repo and its embedded comparison projects

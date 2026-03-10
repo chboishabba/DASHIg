@@ -64,6 +64,7 @@ def main() -> None:
     parser.add_argument("--summary-csv", required=True)
     parser.add_argument("--task", default="mul")
     parser.add_argument("--optimizer", default="adamw")
+    parser.add_argument("--architecture", default="translated_leech_modular_classifier")
     parser.add_argument("--label", default="leech_phase2")
     parser.add_argument("--out-prefix", default="phase2_comparison")
     args = parser.parse_args()
@@ -90,6 +91,7 @@ def main() -> None:
         "trajectory_note": baseline["trajectory_note"],
     }
     local_row = load_local_metrics(Path(args.analysis_dir), Path(args.summary_csv), args.label, args.task, args.optimizer)
+    local_row["architecture"] = args.architecture
 
     fields = list(baseline_row.keys())
     csv_path = Path(f"{args.out_prefix}.csv")

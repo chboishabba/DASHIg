@@ -65,22 +65,52 @@ What currently appears true:
   - current Leech `shared_c ≈ 0.3254`
 - the clean inverse-weight-decay timing screen becomes much noisier than in the baseline
 
+What the first architecture-ablation prelim adds:
+
+- removing the geometric penalty (`lambda_geo = 0`) on the representative `wd = 0.22, 0.30` slice still yields clean grokking
+- but it does not recover the baseline onset law:
+  - prelim `shared_c ≈ 0.3893`
+  - fixed logistic MSE `≈ 0.0292`
+  - fitted logistic MSE `≈ 0.0238`
+- so resonance penalty alone does not appear to be the whole explanation
+- however, the apparent perfect `t95` fit in that prelim is not scientifically meaningful because it uses only two weight-decay points
+
 So the current reading is not simply "Leech destroyed the law." A better statement is:
 
 - the baseline law does not transfer cleanly under the current translated Leech setup
 - some growth-family evidence may remain
 - the observation channel / basis may be shifting the apparent onset and curve shape
 
-This makes architecture ablation the immediate next step before broader optimizer/task variation.
+This keeps architecture ablation as the immediate next step before broader optimizer/task variation, but narrows the hypothesis:
+
+- the translated basis / architecture still looks like a live source of the mismatch
+- the next useful discriminator is now `lambda_geo = 1e-3`, because the neutral plain-transformer prelim is already in hand
+
+What the neutral standard-baseline prelim adds:
+
+- the plain transformer also groks cleanly on the representative `wd = 0.22, 0.30` slice
+- it does not match the DASHI baseline law either:
+  - prelim `shared_c ≈ 0.3397`
+  - fixed logistic MSE `≈ 0.0228`
+  - fitted logistic MSE `≈ 0.0223`
+- on this small slice, it is in the same broad timing regime as the Leech prelim rather than being obviously dominated by it
+
+So, from the data currently in hand, there is not yet a strong basis for an outreach claim like "Leech is almost 10x better than DASHI and clearly better than a standard baseline." The current evidence is narrower:
+
+- both translated Leech and a neutral standard baseline generalize much earlier than the accepted DASHI baseline on this representative slice
+- neither currently reproduces the DASHI timing law
+- and the neutral standard baseline is competitive with the Leech prelim on the same slice
 
 ## Immediate Next Work
 
 1. Keep the accepted Phase 1 baseline from `../dashifine` fixed.
-2. Run the Leech architecture-ablation ladder:
-   - `lambda_geo = 0`
+2. Finish the representative-band Leech prelims:
    - `lambda_geo = 1e-3`
-   - `lambda_geo = 1e-2` control
-3. Only after that, run external validation on:
+   - compare against the existing `lambda_geo = 0` prelim and `lambda_geo = 1e-2` control
+3. Compare the existing plain-baseline prelim against the `lambda_geo = 0` Leech prelim and the `lambda_geo = 1e-2` control.
+4. Run the `lambda_geo = 1e-3` Leech prelim on the same representative band.
+5. Decide from those three prelims whether the full overnight ladder is worth running.
+6. Only after that, run broader external validation on:
    - second architecture
    - second optimizer
    - closely related task

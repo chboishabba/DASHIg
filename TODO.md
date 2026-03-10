@@ -20,13 +20,22 @@
 - [x] Define the translation target explicitly: what constitutes an apples-to-apples comparison between LeechTransformer behavior and the DASHI baseline from `../dashifine`.
 - [x] Add the translated Leech modular benchmark harness, local trajectory analysis, and baseline comparison scripts.
 - [x] Add an ablation orchestration runner so the `lambda_geo` ladder can be executed and summarized as one Phase 2 job.
+- [x] Add a short prelim ablation runner for one-leg, representative-band checks before committing to the full overnight ladder.
 - [x] Run the first translated Leech second-architecture sweep on modular multiplication with AdamW and compare it against the accepted `../dashifine` baseline.
 - [x] Record the current Phase 2 interpretation: solvability transfers; logistic-family evidence remains; shared onset shifts strongly earlier; clean `t95 ~ 1 / wd` behavior degrades.
 - [ ] Run the Leech architecture-ablation ladder first:
   - `lambda_geo = 0`
   - `lambda_geo = 1e-3`
   - `lambda_geo = 1e-2` control
+- [x] Run the representative-band `lambda_geo = 0` prelim on `wd = 0.22, 0.30`.
+- [x] Record the `lambda_geo = 0` prelim result: clean grokking persists, but `shared_c ≈ 0.389` still sits far from the DASHI baseline and does not restore the law.
+- [ ] Run the representative-band `lambda_geo = 1e-3` prelim on `wd = 0.22, 0.30`.
 - [ ] Decide from the ablation whether the current mismatch is driven mainly by resonance penalty strength, frozen geometry, or basis/channel effects.
+- [x] Add a neutral industry-standard modular benchmark implementation on the same task/logging surface as the translated Leech runs.
+- [x] Add a short prelim entrypoint for the neutral standard baseline so it can be screened on the representative weight-decay slice quickly.
+- [x] Run the neutral standard-baseline prelim on `wd = 0.22, 0.30` and compare it against both the accepted `../dashifine` baseline and the Leech prelims before outreach or strong speedup claims.
+- [x] Record the current standard-baseline prelim result: it is competitive with the `lambda_geo = 0` Leech prelim on the representative slice, so there is no strong standard-baseline dominance claim yet.
+- [ ] Use the `lambda_geo = 0`, `lambda_geo = 1e-3`, `lambda_geo = 1e-2`, and plain-baseline representative-band results to decide whether the full overnight ladder is justified.
 - [ ] Re-run the law with a second optimizer after at least one Leech ablation leg looks scientifically comparable.
 - [ ] Re-run the law on a closely related task after the architecture question is cleaner.
 - [x] Standardize a shared report template for all external-validation runs: `t50`, `t95`, onset fraction, fit error, and qualitative trajectory notes.
