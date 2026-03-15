@@ -37,7 +37,7 @@
 - [x] Record the current standard-baseline prelim result: it is competitive with the `lambda_geo = 0` Leech prelim on the representative slice, so there is no strong standard-baseline dominance claim yet.
 - [x] Run an FFT spike test on the current local Leech and plain-baseline `test_loss` trajectories.
 - [x] Record the FFT result: both local models show broadly similar low-frequency components, so there is no distinctive Leech-only spike spacing signal on the current modular runs.
-- [ ] Run derivative-shape analysis on the current normalized growth curves to test whether Leech and the plain baseline share a common bell-shaped rise profile even when spike structure differs.
+- [x] Run derivative-shape analysis on the current normalized growth curves to test whether Leech and the plain baseline share a common bell-shaped rise profile even when spike structure differs.
 - [x] Run derivative-shape analysis on the current normalized growth curves for the Leech and plain representative-band prelims.
 - [x] Record the derivative result: both models show bell-shaped normalized rise profiles, and Leech peaks slightly earlier on average on the current tiny slice, but the sample is too small for strong universality claims.
 - [x] Extend derivative-shape analysis to emit pre-`t50` area, slope proxy, and a compact summary row suitable for a 4-way representative-band comparison table.

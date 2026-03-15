@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-03-15
+
+- Added a root `README.md` that explains repo scope, phase ownership split, current Phase 2 status, key scripts, and the practical run/analysis workflow.
+- Synced `TODO.md` to mark derivative-shape analysis as completed so TODO state matches existing analysis artifacts and scripts.
+
 ## 2026-03-08
 
 - Updated the canonical repo context from the older DASHI comparison thread to the fetched `Theorem Assistance` thread (`6958ff8a-03c8-8321-b906-30e48e412a3a` / `2aec04871d54bda5059cd98155cd7512f13ab503`).
