@@ -125,6 +125,48 @@ So, from the data currently in hand, there is not yet a strong basis for an outr
 - the first FFT spike test does not isolate a unique Leech resonance signature on the local modular runs
 - the derivative-shape test is more promising than FFT and is consistent with the idea that the invariant may be the growth curve rather than the spikes
 
+## New External Discussion Constraints
+
+The linked external issue discussion in `SPUTNIKAI/sovereign-lila-e8#3` adds two useful but still provisional constraints on interpretation.
+
+First, the issue now includes an anecdotal semantic-stability observation:
+
+- E8 reportedly passes through an early "horror phase"
+- Leech reportedly does not on the same broad project line
+
+The strongest safe way to integrate that into this repo is:
+
+- treat it as a hypothesis about bad intermediate modes being suppressed or bypassed under a stronger geometric prior
+- do not yet treat it as evidence of inherent safety
+- do not let it replace the current derivative/growth-law benchmark surface
+
+Second, the issue now includes continued-pretraining observations from an external Leech/Lila run:
+
+- from `300k` to `340k` steps on TinyStories -> FineWeb-edu continuation, stable rank reportedly decreases across sampled layers
+- condition numbers reportedly rise
+- hierarchical layer ordering is preserved
+- the transcribed continuation from `345k` to `400k` preserves that same pattern rather than plateauing
+
+That external result is relevant because it supports a compression/specialization story at least as well as an "unused dimensions get filled by richer data" story. For this repo, the practical consequence is:
+
+- keep "low-dimensional growth family with architecture-specific timing/shape parameters" as the main working model
+- add representation-compression diagnostics to follow-on external validation rather than assuming domain shift should increase effective dimensionality
+
+Third, the same issue now contains a user-side inference-path split:
+
+- CPU inference reportedly produces coherent text
+- GPU inference on an unsupported ROCm path reportedly produces garbage
+
+That should currently be treated as a runtime compatibility issue rather than as evidence for or against any mechanistic semantic claim. In particular, it should not be folded into the "bad intermediate mode" story unless it reproduces on CPU or on a supported accelerator stack.
+
+Fourth, a follow-up local attempt using the extracted GPU wrapper refines that runtime picture:
+
+- the wrapper can start and reach actual GPU execution
+- but on this host it reportedly still triggers the known KFD-reset failure class after about `15` to `30` minutes
+- reported symptoms: black screen, unrecoverable session, no emergency terminal
+
+For this repo, that means the lane should currently be treated as both semantically untrustworthy and operationally unsafe for longer experiment runs. It is therefore not a credible replacement for CPU or a stable supported accelerator path when planning the next ablation leg.
+
 ## Immediate Next Work
 
 1. Keep the accepted Phase 1 baseline from `../dashifine` fixed.
@@ -140,6 +182,10 @@ So, from the data currently in hand, there is not yet a strong basis for an outr
    - closely related task
 7. If external raw step-level E8/Leech logs become available, rerun the FFT spike test on those logs directly rather than extrapolating from the local modular harness.
 8. Extend the derivative-shape analysis to compare Leech, plain baseline, and the accepted DASHI baseline on a larger scan before making universality claims.
+9. If external stable-rank / condition-number logs are available alongside step-level loss and samples, align them to the same time axis and test whether compression changes precede, coincide with, or lag derivative-transition mass.
+10. If the "bad intermediate mode" story is pursued, quantify it with sampled outputs or classifier audits across checkpoints rather than relying on anecdotes.
+11. Exclude unsupported GPU/runtime failures from model-behavior interpretation unless the same effect appears on CPU or a supported accelerator path.
+12. Exclude GPU lanes that trigger host-session resets from unattended run planning until their stability envelope is characterized.
 
 ## Boundaries
 

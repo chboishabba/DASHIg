@@ -38,6 +38,8 @@ If you have stable-rank / condition-number logs from the notebook path, merge th
 SR_CSV=stable_rank_log.csv ./38_lila_phase2_pipeline.sh LeechTransformer/train_logs/340K.md
 ```
 
+The diagram is math-first: each box names the operator or observable being applied, not just the script boundary.
+
 ## Interpretation boundary
 
 Use these artifacts to answer:

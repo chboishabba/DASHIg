@@ -122,6 +122,21 @@ Sub-phase ordering inside Phase 2:
 4. Second optimizer after at least one Leech or standard-baseline result looks scientifically comparable.
 5. Closely related task after that.
 
+Additional external signals now on the table from `SPUTNIKAI/sovereign-lila-e8#3`:
+
+- continued pretraining on a larger corpus reportedly lowers stable rank further while increasing condition numbers, and the transcribed `345k` -> `400k` table suggests that trend is still continuing rather than plateauing
+- an anecdotal "horror phase" appears in E8 but not Leech
+- unsupported GPU-path garbage output appears alongside normal CPU inference, which should currently be treated as a runtime issue rather than a semantic result
+- the extracted GPU wrapper can start but still triggers the known KFD-reset / black-screen failure class after roughly `15` to `30` minutes on this host
+
+These do not change the current ordering. They do change what should be measured once raw external logs are in hand:
+
+- representation compression under domain shift
+- whether semantic-quality transitions align with derivative-transition timing
+- whether geometric priors reduce the occupancy of bad intermediate modes
+- whether any claimed semantic effect survives CPU-vs-GPU and supported-vs-unsupported runtime checks
+- whether a candidate GPU lane is operationally stable enough to be trusted for unattended experiments at all
+
 ### Phase 3. Cross-Paradigm Comparison
 
 Goal:
@@ -156,6 +171,10 @@ Work in this phase:
 - geometry-after-grok analysis
 - metastable-escape interpretation checks
 - observer/entropy analyses as interpretive tools
+- external stable-rank / condition-number alignment against transition timing
+- bad-intermediate-mode / shadow-structure checks using checkpointed samples or audits
+- inference-path robustness checks so runtime artifacts are not mistaken for model geometry
+- host-stability checks for GPU lanes that appear to work initially but later trigger KFD-reset failures
 
 Rule:
 
@@ -183,4 +202,7 @@ Deferred topics:
 - flagship empirical claim: shared-onset logistic law under `t50` normalization
 - immediate next scientific step in this repo: finish the `lambda_geo = 1e-3` representative-band Leech prelim, then compare it against the existing `lambda_geo = 0`, `lambda_geo = 1e-2`, and plain-baseline readouts before making strong external claims about relative speedups
 - mechanism status: metastable delayed plateau is interpretation, not flagship claim
+- external semantic-stability anecdotes are hypothesis-generating evidence only until tied to raw logs, checkpoints, and the shared timing surface
+- unsupported GPU-path corruption is not model evidence by default
+- a GPU lane that triggers black-screen KFD resets is not a valid default compute surface even if it begins executing the workload
 - roadmap audience: internal research planning for this repo and its embedded comparison projects

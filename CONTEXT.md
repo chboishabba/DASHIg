@@ -142,6 +142,49 @@ The earlier "Repo Comparison: Sovereign-Lila-E8 vs Dashi" thread remains histori
    - trajectory-shape notes
 6. Treat external validation as the highest-value next scientific test in this repo.
 
+## External GitHub Discussion Sync
+
+The repo planning surface was also updated against:
+
+- GitHub issue: `SPUTNIKAI/sovereign-lila-e8#3`
+- Title: `imply time to grokking`
+- URL: `https://github.com/SPUTNIKAI/sovereign-lila-e8/issues/3`
+- Source used: GitHub issue/comments
+- Sync date: 2026-03-21
+
+Main topics pulled from that issue:
+
+- The discussion now includes an external anecdote that E8 passed through an early "horror phase" in generation while Leech reportedly did not.
+- A follow-up interpretation from the user side suggests this may reflect a transient inverse / shadow structure or other badly aligned intermediate mode.
+- The current local reading should remain cautious:
+  - this is a mechanism hypothesis worth testing
+  - it is not yet evidence that Leech is inherently safer
+- The issue also adds external continued-pretraining observations on Leech/Lila:
+  - stable rank decreases from `300k` to `340k` during TinyStories -> FineWeb-edu continuation
+  - condition numbers rise
+  - layer ordering by compression is preserved
+- The transcribed follow-up now extends that same trend to `400k`:
+  - block `0` stable rank falls from about `9.80` at `345k` to `8.55` at `400k`
+  - block `5` stable rank falls from about `13.67` to `13.05`
+  - block `11` stable rank falls from about `12.47` to `9.89`
+  - corresponding condition numbers continue rising across all three sampled blocks
+- This external result matters because it pushes against the simple "new domain fills unused dimensions" expectation and instead suggests further specialization / crystallization under broader data.
+- The same issue also includes a user-side CPU-vs-GPU inference split:
+  - CPU output is coherent prose
+  - GPU output is garbage on an old unsupported ROCm path
+  - the correct local handling is to treat that as a hardware/runtime artifact unless it reproduces on CPU or on a supported GPU stack
+- The follow-up local runtime attempt adds one more important constraint:
+  - the extracted ROCm GPU wrapper can start the workload and reach actual GPU execution
+  - but on this host it still triggers the known KFD-reset failure class after roughly `15` to `30` minutes
+  - reported failure mode: black screen, unrecoverable desktop session, no emergency terminal
+  - so this GPU lane is not just semantically unreliable; it is also operationally unsafe for longer unattended experiment runs on this machine
+- The safest integration with local docs is therefore:
+  - keep the growth-law / derivative-family claim primary
+  - treat "bad intermediate mode suppression" and "continued compression under domain shift" as new Phase 2 / Phase 4 test targets
+  - exclude unsupported inference-path failures from semantic-model evidence
+  - exclude this unstable GPU lane from practical overnight-run planning until the KFD-reset class failure is addressed
+  - require raw aligned logs before promoting them to flagship claims
+
 ## Notes
 
 - The thread was fetched online by UUID and persisted into `~/chat_archive.sqlite`, then resolved locally from the DB.

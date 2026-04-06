@@ -2,35 +2,82 @@
 left to right direction
 skinparam backgroundColor #ffffff
 skinparam shadowing false
-skinparam RoundCorner 18
-skinparam defaultFontName Arial
+skinparam RoundCorner 16
 skinparam ArrowColor #334155
 skinparam ArrowThickness 2
 skinparam packageStyle rectangle
+skinparam defaultFontName Arial
+skinparam rectangle {
+  BorderColor #1f2937
+  FontColor #111827
+  BackgroundColor #f8fafc
+}
+skinparam artifact {
+  BorderColor #1f2937
+  FontColor #111827
+  BackgroundColor #eff6ff
+}
+skinparam note {
+  BackgroundColor #fefce8
+  BorderColor #a16207
+}
 
-rectangle "External LILA / Leech run" as Run
-artifact "raw train log\nstep / train_loss / val_loss" as RawLog
-component "35_lila_log_to_csv.py" as Adapter
-artifact "aligned CSV\nstep, train_loss, val_loss" as Aligned
-component "36_lila_training_dynamics.py" as Dyn
-component "37_lila_delta_cone_analysis.py" as Cone
-artifact "timing plot\nloss + derivative" as Plot
-artifact "delta-cone rank\nforward / cone fractions" as ConeOut
-artifact "Phase 2 comparison surface" as Surface
+artifact "Raw log\n(step_t, train_loss_t, val_loss_t)" as RawLog
+component "35_lila_log_to_csv.py\nparse stepwise trace" as Adapter
+artifact "Trace CSV\nS_t := (step_t, loss_t, val_t)" as Trace
+artifact "Optional SR/CN CSV\nR_t := (sr_t, cn_t)" as Rep
+component "step join\nX_t := S_t ⊕ R_t" as Join
+artifact "Aligned state surface\nX_t = (loss_t, val_t, sr_t, cn_t, ...)" as Aligned
 
-Run --> RawLog
-RawLog --> Adapter
-Adapter --> Aligned
-Aligned --> Dyn
-Aligned --> Cone
-Dyn --> Plot
+component "36_lila_training_dynamics.py\nΔ loss_t := loss_t - loss_{t-1}\nplot (loss_t, Δ loss_t)" as Dyn
+artifact "Timing surface\nloss_t, Δ loss_t, peak(Δ), onset" as DynOut
+
+component "37_lila_delta_cone_analysis.py\nrobust scale z_i := tanh((x_i - med_i)/(1.4826 MAD_i))\nΔx_t := x_{t+1} - x_t\nQ_s(Δx_t) := Σ_i s_i (Δx_{t,i})^2\nforward_t := (Δ arrow_t <= ε_arrow)" as Cone
+artifact "Cone surface\ncone_frac\nforward_frac\nforward_cone_frac\nargmax_s compatibility" as ConeOut
+
+component "bad-mode surface\nlabel_t :=\n  incoherent, if coherence_t < θ_c\n  coherent_bad, if bad_t >= θ_b\n  coherent_safe, otherwise" as Basin
+artifact "Regime surface\nbad_dwell_frac\nsafe_dwell_frac\nbad_to_safe_ratio\nmean bad run\nbad→safe count" as BasinOut
+
+artifact "Phase 2 comparison surface\nO := {onset, timing, derivative shape,\nSR/CN trend, basin dwell}" as Surface
+
+rectangle "DASHI reading" as DashiRead {
+  artifact "State layer\nS_t := (loss_t, Δloss_t, SR_t, CN_t, basin_t)" as DashiS
+  artifact "Lattice layer\nL := (S, T, d_U, ≼_m)" as DashiL
+  artifact "Proposal layer\nP := geometry suppresses bad modes" as DashiP
+  artifact "Gap / governance\nF(P) := predicted vs measured\nbad-basin occupancy\naccept only if F(P) < ε" as DashiF
+}
+
+RawLog --> Adapter : parse
+Adapter --> Trace : emit S_t
+Rep --> Join : optional R_t
+Trace --> Join : align by step
+Join --> Aligned : emit X_t
+
+Aligned --> Dyn : apply Δ on loss axis
+Dyn --> DynOut
+
+Aligned --> Cone : choose features\nexclude arrow from Q
 Cone --> ConeOut
-Plot --> Surface
+
+Aligned --> Basin : use basin or derive labels
+Basin --> BasinOut
+
+DynOut --> Surface
 ConeOut --> Surface
+BasinOut --> Surface
+
+DynOut --> DashiS
+ConeOut --> DashiS
+BasinOut --> DashiS
+DashiS --> DashiL
+DashiL --> DashiP
+DashiP --> DashiF
 
 note bottom of Surface
-Empirical alignment first:
-timing, spikes, derivative mass,
-then optional SR/CN and sample audits.
+Proposal stays separate from observation.
+Example:
+P = geometry suppresses bad modes
+F(P) = predicted vs measured bad-basin occupancy
+Accept only after comparison, not before.
 end note
 @enduml
