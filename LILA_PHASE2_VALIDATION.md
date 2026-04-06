@@ -30,6 +30,7 @@ This writes:
 - optional aligned representation columns when `SR_CSV` is provided
 - training-dynamics plot
 - delta-cone ranking CSV
+- optional bad-mode suppression summary JSON and basin-transition CSV when basin labels or score columns are available
 
 If you have stable-rank / condition-number logs from the notebook path, merge them on the same step axis:
 
@@ -45,6 +46,7 @@ Use these artifacts to answer:
 - whether raw LILA timing is comparable to the existing Phase 2 surfaces
 - whether aligned representation channels such as stable rank or condition
   number lead, lag, or coincide with those transitions
+- whether coherent-bad occupancy decreases after coherence has formed
 
 Do not treat the output as a proof that geometry enforces safety.
 Treat it as a way to put external LILA evidence onto the same comparison plane

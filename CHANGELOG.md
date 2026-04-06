@@ -3,6 +3,7 @@
 ## 2026-04-06
 
 - Added an external-LILA Phase 2 utility pack:
+  - extended the delta-cone scan with optional bad-mode suppression summaries and basin-transition outputs when basin or score columns are available
   `35_lila_log_to_csv.py`,
   `36_lila_training_dynamics.py`,
   `37_lila_delta_cone_analysis.py`,

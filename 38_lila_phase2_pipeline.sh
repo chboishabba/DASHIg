@@ -19,6 +19,8 @@ mkdir -p "$OUT_DIR"
 CSV_PATH="$OUT_DIR/${MODEL_NAME}.csv"
 PLOT_PATH="$OUT_DIR/${MODEL_NAME}_training_dynamics.png"
 DELTA_PATH="$OUT_DIR/${MODEL_NAME}_delta_cone.csv"
+REGIME_PATH="$OUT_DIR/${MODEL_NAME}_bad_mode_summary.json"
+BASIN_PATH="$OUT_DIR/${MODEL_NAME}_basin_transitions.csv"
 
 CSV_ARGS=(
   --log "$LOG_PATH"
@@ -58,6 +60,8 @@ python 37_lila_delta_cone_analysis.py \
   --features "$FEATURES" \
   --arrow train_loss \
   --arrow-mode decreasing \
+  --regime-out "$REGIME_PATH" \
+  --basin-transitions-out "$BASIN_PATH" \
   --out "$DELTA_PATH"
 
 echo "[ok] phase2 artifacts in $OUT_DIR"

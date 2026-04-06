@@ -53,3 +53,5 @@
   and `38_lila_phase2_pipeline.sh`
   adapt raw `LeechTransformer/train_logs/*.md` logs onto the same timing surface
   already used for the modular comparison work.
+
+- The external LILA Phase 2 delta-cone lane now also carries an optional bad-mode suppression surface: basin dwell fractions, coherent-bad/coherent-safe run lengths, and bad->safe transition counts when a basin or score-derived basin can be supplied.

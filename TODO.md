@@ -58,6 +58,7 @@
   - stable rank / condition number
   - checkpointed sample audits
 - [ ] Record the transcribed external `345k` -> `400k` stable-rank / condition-number continuation as additional compression-under-domain-shift evidence and watch for plateau vs continued descent.
+- [x] Add optional bad-mode suppression summaries to the external delta-cone scan: basin dwell fractions, bad/safe run lengths, and bad->safe transition counts.
 - [ ] If the "horror phase" anecdote is pursued, define a measurable proxy for bad intermediate modes before interpreting it as geometry-induced safety.
 - [ ] Define a simple checkpoint-audit surface for the "bad intermediate mode" story:
   - fixed prompts

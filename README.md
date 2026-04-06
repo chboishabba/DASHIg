@@ -132,3 +132,5 @@ External LILA log adaptation:
   they are used in mechanism arguments.
 - Unsupported inference-path failures should be excluded from semantic claims unless they reproduce on CPU or on a supported accelerator stack.
 - A GPU lane that starts but crashes the host session is still not a usable experiment surface for unattended runs.
+
+- `37_lila_delta_cone_analysis.py` can also emit bad-mode suppression summaries when a `basin` column or `coherence_score`/`bad_mode_score` columns are present.
