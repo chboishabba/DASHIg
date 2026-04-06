@@ -1,5 +1,33 @@
 # Changelog
 
+## 2026-04-06
+
+- Added an external-LILA Phase 2 utility pack:
+  `35_lila_log_to_csv.py`,
+  `36_lila_training_dynamics.py`,
+  `37_lila_delta_cone_analysis.py`,
+  and `38_lila_phase2_pipeline.sh`.
+- Added `LILA_PHASE2_VALIDATION.md` and `LILA_PHASE2_VALIDATION.puml` so the
+  repo now has a short empirical note for adapting raw `LeechTransformer`
+  training logs onto the existing timing / derivative / comparison surface.
+- Rendered the PlantUML note to `LILA_PHASE2_VALIDATION.svg` and ran the new
+  pipeline once on `LeechTransformer/train_logs/340K.md`, producing example
+  outputs under `lila_phase2_validation/`.
+- Updated `README.md`, `TODO.md`, and `COMPACTIFIED_CONTEXT.md` so this path is
+  recorded as a Phase 2 validation lane rather than as broader formalism work.
+
+## 2026-03-21
+
+- Synced local planning docs against the updated external discussion in `SPUTNIKAI/sovereign-lila-e8#3` (`imply time to grokking`).
+- Recorded two new hypothesis-generating inputs from that issue:
+  - the E8-vs-Leech "horror phase" anecdote should be treated as a possible bad-intermediate-mode / shadow-structure effect, not as evidence of inherent safety
+  - continued pretraining on a larger corpus may further compress stable rank and increase condition numbers rather than expanding effective dimensionality
+- Updated `README.md`, `GROKKING_TIME_RESCALING_NOTE.md`, `ROADMAP.md`, `TODO.md`, `CONTEXT.md`, and `COMPACTIFIED_CONTEXT.md` so future work measures those hypotheses against the existing timing/derivative surface instead of folding them directly into the flagship claim.
+- Added `external_log_alignment_template.md` so external logs, stable-rank measurements, checkpointed samples, and runtime checks can be aligned before making mechanism claims.
+- Extended the context sync with the transcribed `345k` -> `400k` SR/CN continuation and the CPU-normal / GPU-garbage inference split.
+- Explicitly recorded the CPU-vs-GPU split as a runtime-compatibility issue by default, not model evidence.
+- Recorded the follow-up GPU bring-up result: the extracted wrapper can start the workload on GPU, but on this host it still triggers the known KFD-reset / black-screen failure after about `15` to `30` minutes, so it is not a safe unattended compute path.
+
 ## 2026-03-15
 
 - Added a root `README.md` that explains repo scope, phase ownership split, current Phase 2 status, key scripts, and the practical run/analysis workflow.

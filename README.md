@@ -27,6 +27,12 @@ Short read:
 - Leech is not yet clearly dominant vs the plain baseline on that slice
 - FFT on local modular runs is non-distinctive
 - derivative-shape analysis is more informative and currently suggests a shared growth-family signal with timing differences
+- external discussion in `SPUTNIKAI/sovereign-lila-e8#3` now adds two follow-on hypotheses to test locally:
+  - continued pretraining may further compress stable rank rather than expand it
+  - stronger geometric priors may suppress bad intermediate modes, but this remains a hypothesis until raw logs and sample audits are aligned with the existing timing surface
+- the same external thread also strengthens one negative constraint:
+  - unsupported GPU-path garbage output should be treated as a hardware/runtime problem, not as model-behavior evidence, when CPU inference is normal
+  - the extracted GPU wrapper may start correctly but still trips the known KFD-reset / black-screen failure class after roughly `15` to `30` minutes on this host, so it is not a safe routine compute path yet
 
 See:
 
@@ -52,6 +58,10 @@ Analysis tools:
 - `32_fft_spike_analysis.py`
 - `33_logistic_derivative_analysis.py`
 - `34_derivative_comparison_table.py`
+- `35_lila_log_to_csv.py`
+- `36_lila_training_dynamics.py`
+- `37_lila_delta_cone_analysis.py`
+- `38_lila_phase2_pipeline.sh`
 
 Model implementations:
 
@@ -64,7 +74,8 @@ Model implementations:
 2. Run trajectory analysis.
 3. Compare against the accepted `../dashifine` baseline.
 4. Run derivative/FFT diagnostics as needed.
-5. Update docs/TODO/changelog before changing direction.
+5. If external LILA logs are available, adapt them onto the same Phase 2 surface.
+6. Update docs/TODO/changelog before changing direction.
 
 The current immediate next step is:
 
@@ -105,8 +116,19 @@ python 34_derivative_comparison_table.py \
   --out-prefix derivative_comparison_prelim
 ```
 
+External LILA log adaptation:
+
+```bash
+./38_lila_phase2_pipeline.sh LeechTransformer/train_logs/340K.md
+```
+
 ## Notes
 
 - The root worktree may contain generated artifacts from analysis runs.
 - Treat representative-band (`wd = 0.22, 0.30`) outcomes as directional, not final.
 - Larger-seed claims should be made only after broader runs are complete.
+- External anecdotes about semantic stability or safety should be treated as prompts for measurement, not as settled architecture claims.
+- External LILA/Leech logs should be adapted onto the same timing surface before
+  they are used in mechanism arguments.
+- Unsupported inference-path failures should be excluded from semantic claims unless they reproduce on CPU or on a supported accelerator stack.
+- A GPU lane that starts but crashes the host session is still not a usable experiment surface for unattended runs.

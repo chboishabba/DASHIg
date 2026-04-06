@@ -43,11 +43,42 @@
 - [x] Extend derivative-shape analysis to emit pre-`t50` area, slope proxy, and a compact summary row suitable for a 4-way representative-band comparison table.
 - [x] Add a compact derivative-comparison table tool for `lambda_geo = 0`, `1e-3`, `1e-2`, and plain-baseline summaries.
 - [ ] If external raw step-level E8/Leech logs are obtained, rerun the FFT spike test on those logs directly.
+- [ ] If external raw step-level E8/Leech logs are obtained, align them with stable-rank / condition-number measurements where available rather than treating loss spikes in isolation.
+- [x] Add a thin external-LILA log adapter, timing plotter, and delta-cone scan so
+  `LeechTransformer/train_logs/*.md` can be put onto the same Phase 2 surface
+  without manual spreadsheet work.
 - [ ] Extend derivative-shape analysis to the broader Leech/plain/DASHI comparison surface if the full ladder is run.
 - [ ] Use the `lambda_geo = 0`, `lambda_geo = 1e-3`, `lambda_geo = 1e-2`, and plain-baseline representative-band results to decide whether the full overnight ladder is justified.
 - [ ] Re-run the law with a second optimizer after at least one Leech ablation leg looks scientifically comparable.
 - [ ] Re-run the law on a closely related task after the architecture question is cleaner.
 - [x] Standardize a shared report template for all external-validation runs: `t50`, `t95`, onset fraction, fit error, and qualitative trajectory notes.
+- [ ] Add an external-log comparison template that can join:
+  - stepwise loss / validation
+  - derivative-transition metrics
+  - stable rank / condition number
+  - checkpointed sample audits
+- [ ] Record the transcribed external `345k` -> `400k` stable-rank / condition-number continuation as additional compression-under-domain-shift evidence and watch for plateau vs continued descent.
+- [ ] If the "horror phase" anecdote is pursued, define a measurable proxy for bad intermediate modes before interpreting it as geometry-induced safety.
+- [ ] Define a simple checkpoint-audit surface for the "bad intermediate mode" story:
+  - fixed prompts
+  - toxicity / violence / anomaly proxy
+  - human notes
+  - alignment to training step and derivative mass
+- [ ] Record the continued-pretraining stable-rank result from `SPUTNIKAI/sovereign-lila-e8#3` as hypothesis-generating evidence for compression-under-domain-shift, then test whether the same pattern appears on any locally reproducible surface.
+- [ ] Add a runtime-validation checklist for external inference anecdotes:
+  - CPU vs GPU
+  - supported vs unsupported accelerator path
+  - dtype / sampling settings
+  - same prompt, same checkpoint
+- [ ] Record the extracted GPU-wrapper result as partial bring-up only:
+  - workload starts on GPU
+  - host hits the known KFD-reset / black-screen failure after about `15` to `30` minutes
+  - do not treat this lane as safe for unattended ablation runs
+- [ ] If the gfx803 GPU lane is revisited, characterize the stability envelope explicitly:
+  - shortest reproducible time-to-reset
+  - prompt length / batch / token sensitivity
+  - whether `HIP_LAUNCH_BLOCKING=1` or solver restrictions change failure timing
+  - whether emergency-shell recovery is possible on any variant
 
 ## Phase 3: Cross-Paradigm Comparison
 
@@ -57,6 +88,9 @@
 ## Phase 4: Geometry and Mechanism
 
 - [ ] Evaluate the metastable-escape interpretation against the new collapse law rather than treating it as a standalone story.
+- [ ] Evaluate the "shadow structure" / inverse-mode interpretation against checkpointed outputs and representation diagnostics rather than prose analogy alone.
+- [ ] Evaluate whether continued compression under domain shift is better described as global crystallization, continued specialization, or a measurement artifact.
+- [ ] Separate semantic corruption claims from host-stability failures when summarizing external accelerator evidence.
 - [ ] Run geometry-after-grok analyses only after at least one external-validation setting reproduces the law.
 - [ ] Use `cognitive-observer-simulation/` as an interpretation/analysis branch rather than as the immediate benchmark driver.
 

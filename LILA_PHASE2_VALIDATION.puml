@@ -1,0 +1,36 @@
+@startuml
+left to right direction
+skinparam backgroundColor #ffffff
+skinparam shadowing false
+skinparam RoundCorner 18
+skinparam defaultFontName Arial
+skinparam ArrowColor #334155
+skinparam ArrowThickness 2
+skinparam packageStyle rectangle
+
+rectangle "External LILA / Leech run" as Run
+artifact "raw train log\nstep / train_loss / val_loss" as RawLog
+component "35_lila_log_to_csv.py" as Adapter
+artifact "aligned CSV\nstep, train_loss, val_loss" as Aligned
+component "36_lila_training_dynamics.py" as Dyn
+component "37_lila_delta_cone_analysis.py" as Cone
+artifact "timing plot\nloss + derivative" as Plot
+artifact "delta-cone rank\nforward / cone fractions" as ConeOut
+artifact "Phase 2 comparison surface" as Surface
+
+Run --> RawLog
+RawLog --> Adapter
+Adapter --> Aligned
+Aligned --> Dyn
+Aligned --> Cone
+Dyn --> Plot
+Cone --> ConeOut
+Plot --> Surface
+ConeOut --> Surface
+
+note bottom of Surface
+Empirical alignment first:
+timing, spikes, derivative mass,
+then optional SR/CN and sample audits.
+end note
+@enduml
