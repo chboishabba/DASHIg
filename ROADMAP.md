@@ -311,3 +311,45 @@ independent LM heldout/timing, LLM steering and original
 Agda learned-carrier correspondence remain **OPEN**.
 No new GPU experiment, ablation or grokking theorem is claimed
 by this roadmap-only update.
+
+
+## 11 November 2026 — formal-first learning efficiency and original Sophontic/AdamW handoff
+
+The originally intended Leech/LILA claim concerns
+**faster learning/generalisation, fewer genuinely
+active neurons or FLOPs, better compression and
+quality at fixed resource budget**. Final modular
+test accuracy 100% for both translated Leech
+and plain baseline does not decide this. Existing
+`t50,t95` evidence on WD .22/.30 remains mixed.
+Measure predeclared right-censored time to
+heldout-quality threshold, per-token active units,
+actual FLOPs, memory, throughput and whole
+model bits. Same-task multi-seed timing and
+same-attention-implementation controlled
+geometry on/off are still open.
+
+An authoritative **formal-first complete-system
+ledger** is now in
+`chboishabba/dashi_agda/Docs/LILAWholeSystemLearningEfficiencySophonticAdamWFormalMaxCut20261111.md`.
+Reuse `GrokkingOperatorContract`, `GrokkingCOLBridge`,
+`DASHIgGrokkingEmpiricalBridgeExact`,
+`GrokkingCircuitTemporalAlignmentExact`,
+`FullLearningStateFutureQuotientExact`,
+`GrokkingInvariantSubspaceSelectionExact`,
+and model-specific PR #1094/#1095/#1265
+Sophontic paired intervention, Weyl and
+forward-only Dust donors. The missing source
+bridge is actual complete-state AdamW
+(weights, moments, RNG, data schedule)
+plus real `lambda_geo` loss and original
+source model tensor semantics, then an
+admissible time-to-quality/resources Pareto
+comparison and stage-aligned paired neural
+steering experiment.
+
+No new simulation or hardware benchmark is
+claimed by this roadmap change. The existing
+translated Leech/plain preliminary experiments
+and dashifine seven-setting grokking law remain
+prior evidence, not new deliverables.
