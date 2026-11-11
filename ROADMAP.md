@@ -256,3 +256,58 @@ C2 quality probes now belong to LeechTransformer PR #4
 and must not overwrite this prior local empirical
 result. This cross-project correction does not claim
 any newly run benchmark.
+
+
+## 11 November 2026 — grokking ownership and LILA integration correction
+
+The original **dashifine Phase 1** result is already a source-documented
+7-weight-decay (0.20–0.40) p=97 delayed-generalisation empirical
+trajectory: `t/t50` rise collapse, fitted shared normalized onset
+`t0≈0.8055*t50`, shared post-onset logistic MSE ≈0.000360
+versus per-run onset ≈0.000351. The empirical law is an
+established **observational baseline** for this programme; the proposed
+slow-manifold/metastability/inverse-`wd` mechanism and universality
+are **not** established neural theorems.
+
+This repository's **Phase 2 tests already executed** a translated
+Leech architecture (`lambda_geo=0`) and neutral plain transformer
+on the same p=97 modular multiplication task, weight decays 0.22/0.30,
+seed 0 and 30% training examples. Both reached 100% test accuracy.
+Leech `t50=5060/6220` versus plain `4520/8320`;
+Leech `t95=5500/12500` versus plain `6900/9300`.
+There is no consistent Leech timing dominance. Normalized onset
+`c≈0.3893` Leech zero-geometry vs `c≈0.3397` plain;
+initial Leech `c≈0.3254` versus upstream `c≈0.8055`.
+Original saved FFT did not isolate a unique Leech spike signature;
+derivative peaks about `1.069` Leech and `1.271` plain (n=2 each).
+
+**Exact next phase/deliverables without rediscovering old runs:**
+
+1. Complete **`lambda_geo=1e-3` and `1e-2`** on the existing
+   `29_leech_arch_ablation_prelim.py` family and 0.22/0.30 band.
+2. Make a same-architecture shared-Q/K orthogonal on/off negative
+   control, holding architecture/parameter initialisation, token data,
+   optimizer and activation semantics constant. Existing Leech-vs-plain
+   MHA comparisons do not isolate geometry causally.
+3. Broaden seeds, weight decays, optimiser and related tasks only
+   after the small controlled ablation answers whether the
+   geometric penalty influences trajectory shape/timing.
+4. Use existing `35–38_lila_*` log adapters to join the
+   original LILA checkpoint and phase-200 GPU-native training traces,
+   separate from previously reported 340K–400K upstream logs.
+5. Coordinate with LeechTransformer's independent heldout geometry
+   and LLM-guided neuron-steering programme; measure steering effects
+   across memorisation, onset, generalisation rise and late phases,
+   with predeclared external evaluation and random/equal-norm controls.
+6. Return any reproducible carrier/action facts to the actual
+   E8→369, dialectic/trialectic and ternary pants source owners in
+   `dashi_agda`; formal finite carriers do not imply a
+   learned-neural mechanism or smooth gluing result.
+
+**Status:** Phase 1 empirical reference **DONE in tested regime**;
+Phase 2 translated Leech/plain two-setting prelim **DONE**;
+nonzero-`lambda_geo`, same-architecture causal geometry,
+independent LM heldout/timing, LLM steering and original
+Agda learned-carrier correspondence remain **OPEN**.
+No new GPU experiment, ablation or grokking theorem is claimed
+by this roadmap-only update.
