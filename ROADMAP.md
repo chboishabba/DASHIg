@@ -206,3 +206,53 @@ Deferred topics:
 - unsupported GPU-path corruption is not model evidence by default
 - a GPU lane that triggers black-screen KFD resets is not a valid default compute surface even if it begins executing the workload
 - roadmap audience: internal research planning for this repo and its embedded comparison projects
+
+
+## 11 November 2026 — prior executed Leech-vs-plain baseline for the LILA handoff
+
+This repository already executed **the architectural-prior comparison
+requested again in the LeechTransformer research discussion**. It is
+the source owner and should not be counted as a newly missing
+implementation in that project's roadmap.
+
+Actual source artifacts:
+- `leech_arch_ablation_prelim/mul_adamw_lambda_0/scan.csv`
+  for the translated Leech modular model;
+- `plain_baseline_prelim/scan.csv` for the neutral standard transformer;
+- `derivative_comparison_prelim.csv` for normalized trajectory
+  derivatives; and `COMPACTIFIED_CONTEXT.md` for interpretation.
+
+**Measured 2-WD/1-seed result:** modular multiplication mod 97,
+30% train split, 192 hidden features, 8 heads, 2 layers,
+AdamW LR 0.001; weight decay 0.22 and 0.30. At
+`lambda_geo=0`, Leech had `t50=5060/6220`,
+`t95=5500/12500`, final test losses
+`0.010609/0.011186`; plain transformer
+`t50=4520/8320`, `t95=6900/9300`,
+final test losses `0.005975/0.010468`.
+Both models achieved 100% test accuracy. Mixed onset
+ordering and similar derivative patterns provide no
+consistent Leech superiority on these two cases.
+This does **not** falsify or reproduce Kornienko's
+original TinyStories BPC/compression claim.
+
+Next *unpaid* experimental work is **not** to invent
+another modular comparison harness. Reuse the current
+data, logs, and control architecture for
+`lambda_geo=1e-3`, `lambda_geo=1e-2`,
+multiple random seeds and a shared-attention
+implementation gauge/identity-control arm.
+Then report separately an original-author
+TinyStories/BPC metric-faithful reproduction
+in LeechTransformer (if source datasets/checkpoints
+are available). This repo's `LeechSelfAttention`
+and plain `nn.MultiheadAttention` are different
+implementation families, so their relative timings
+are architectural comparisons, not a pure isolated
+causal geometry ablation.
+
+The original dense LILA GPU 200-step trainer and
+C2 quality probes now belong to LeechTransformer PR #4
+and must not overwrite this prior local empirical
+result. This cross-project correction does not claim
+any newly run benchmark.
